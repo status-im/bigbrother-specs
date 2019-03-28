@@ -51,7 +51,7 @@ Inspired by the ETH 2.0 implementation process, we have decided to roll out BigB
  - Mixnet
  - [PSS](https://gist.github.com/zelig/d52dab6a4509125f842bbd0dce1e9440)
 
-### Phase 2 - @TODO NEEDS CODE NAME (P2P Overlay)
+### Phase 2 - STONEGHOST (P2P Overlay)
 
 ### Phase 3 - @TODO NEEDS CODE NAME (MLS - Message Layer Security)
 
