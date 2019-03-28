@@ -4,7 +4,7 @@
 
 ## Abstract
 
-BigBrother defines a family of protocols that when combined create a decentralized peer-to-peer messaging stack. BigBrother should enable various [messaging types](https://hackmd.io/172DHOMsS_6DPjok84WxDw), in order to be called a messaging stack.
+BigBrother defines a family of protocols that when combined create a decentralized peer-to-peer messaging stack. BigBrother should enable various [messaging types](message-types.md), in order to be called a messaging stack.
 
 The family of protocols SHOULD be flexible enough to allow various use case implementations not limited to that being defined by the entire family. The BigBrother protocol itself defines mainly the way the family of protocols interact with one another allowing for customizability on each layer.
 
