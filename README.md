@@ -14,14 +14,19 @@ The family of protocols SHOULD be flexible enough to allow various use case impl
 
 ## Terms
  **Stack** - Defines the entire family of protocols, how they interact and what goals are achieved.
+ 
  **Protocol** - Defines a single layer in the *stack* along with its endpoints used for communication with various other protocols in the stack.
 
 ## Design Goals
 
 **1. Anonymity** - @TODO
+
 **2. Scalable** - @TODO
+
 **3. Incentivized** - @TODO
+
 **4. Decentralized** - @TODO
+
 **5. Resistant** - @TODO
 
 ## System Design / Architecture
