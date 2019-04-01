@@ -21,15 +21,17 @@ The family of protocols SHOULD be flexible enough to allow various use case impl
 
 ## Design Goals
 
-**1. Anonymity** - @TODO
+**1. Anonymity** - `sender` / `receiver` MUST remain anonymous.
 
-**2. Scalable** - @TODO
+**2. Unlinkability** - It should not be identifiable which parties are talking to eachother. 
 
-**3. Incentivized** - @TODO
+**3. Scalable** - @TODO
 
-**4. Decentralized** - @TODO
+**4. Incentivized** - @TODO
 
-**5. Resistant** - @TODO
+**5. Decentralized** - @TODO
+
+**6. Resistant** - @TODO
 
 ## System Design / Architecture
 
