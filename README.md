@@ -65,8 +65,6 @@ Throughout the design of the stack we follow the SOLID design principles, redefi
 
 Inspired by the ETH 2.0 implementation process, we have decided to roll out BigBrother in multiple phases. The phases represent layers in the protocol which are sometimes more loosely coupled than ETH 2.0 components.
 
-**@TODO EACH PHASE SHOULD GET A DOC**
-
 ### Phase 0 - [XKEYSCORE (Data Sync)](/data_sync/README.md)
 
 ### Phase 1 - BULLRUN (Transport Privacy Layer)
