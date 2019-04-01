@@ -51,7 +51,7 @@ Inspired by the ETH 2.0 implementation process, we have decided to roll out BigB
 
 **@TODO EACH PHASE SHOULD GET A DOC**
 
-### Phase 0 - XKEYSCORE (Data Sync)
+### Phase 0 - [XKEYSCORE (Data Sync)](/data_sync/README.md)
 
 ### Phase 1 - BULLRUN (Transport Privacy Layer)
 
