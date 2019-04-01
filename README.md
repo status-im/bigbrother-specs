@@ -2,6 +2,19 @@
 
 *Big Brother can't watch you!*
 
+## Table of Contents
+- [Abstract](#abstract)
+- [Motivation](#motivation)
+- [Design Goals](#design-goals)
+- [System Design / Architecture](#system-design--architecture)
+  - [SOLID](#solid)
+- [Phases](#phases)
+  - [Phase 0](#phase-0---xkeyscore-data-sync)
+  - [Phase 1](#phase-1---bullrun-transport-privacy-layer)
+  - [Phase 2](#phase-2---stoneghost-p2p-overlay)
+  - [Phase 3](#)
+- [Footnotes](#footnotes)
+
 ## Abstract
 
 BigBrother defines a family of protocols that when combined create a decentralized peer-to-peer messaging stack. BigBrother should enable various [messaging types](message-types.md), in order to be called a messaging stack.
