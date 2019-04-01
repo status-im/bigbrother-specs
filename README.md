@@ -5,6 +5,7 @@
 ## Table of Contents
 - [Abstract](#abstract)
 - [Motivation](#motivation)
+- [Terms](#terms)
 - [Design Goals](#design-goals)
 - [System Design / Architecture](#system-design--architecture)
   - [SOLID](#solid)
