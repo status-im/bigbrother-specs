@@ -9,13 +9,13 @@ This document compares various forms of data sync protocols and applications, al
 
 ## Table of contents
 
-1. [Introduction](#introduction)
-2. [Background and definitions](#background-and-definitions)
-3. [Methodology](#methodology)
-4. [Comparison](#comparison)
-5. [Summary](#summary)
-6. [Acknowledgement](#acknowledgement)
-7. [References](#references)
+1. [Introduction](#1-introduction)
+2. [Background and definitions](#2-background-and-definitions)
+3. [Methodology](#3-methodology)
+4. [Comparison](#4-comparison)
+5. [Summary](#5-summary)
+6. [Acknowledgements](#6-acknowledgements)
+7. [References](#7-references)
 
 ## 1. Introduction
 In a p2p network you often want to reliably transmit and replicate data across participants. This can be either large files, or messages that users want to exchange between each other in a private chat. This is especially challenging on mobile devices. Additionally, you might want security properties beyond robustness, such as privacy-preservation, censorship resistance and coercion resistance.
