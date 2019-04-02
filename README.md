@@ -49,6 +49,8 @@ The family of protocols SHOULD be flexible enough to allow various use case impl
 
 **6. Resistant** - @TODO
 
+**8. Inclusive** - Protocols within the stack should be designed to work on resource restricted devices, this allows for a higher participation making the entire BigBrother protocol more usable and reliable. 
+
 ## System Design / Architecture
 
 The protocols summarized by BigBrother all follow a standard of architectural design principles with the goal of keeping each component noncomplicated. We architect a stack where each protocol interacts holistically, without the desire to create unnecessary complexity. Each protocol included in the stack should be simplistic enough to allow for multiple implementations creating client diversity, allowing us to ensure that the entire stack is unambiguous<sup>1</sup>.
