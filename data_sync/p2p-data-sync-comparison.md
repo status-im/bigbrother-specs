@@ -1,5 +1,5 @@
 # Different approaches to p2p data sync
-*Written March 29, 2019 by Oskar. Updated April 1, 2019.*
+*Written March 29, 2019 by Oskar. Updated April 1, April 2.*
 
 **WARNING: This is an early draft, and likely contains errors.**
 
@@ -50,22 +50,39 @@ Let's start with a raw list of definitions. These are phrases with some specific
 
 *Content addressable storage (CAS)*: Storing information such that it can be retrieved by its content, not its location. Commonly performed by the use of cryptographic hash functions.
 
+*Public P2P*: Open network where peers can connect to each other.
+
+*Structured P2P network*: A public p2p network where data placement is related to the network topology. E.g. a DHT.
+
+*Unstructed P2P network*: A public p2p network where peers connect in an ad hoc manner, and a peer only knows its neighbors, not what they have. 
+
+*Super-peer P2P network*: A non-pure p2p network, hybrid client/server architecture, where certain peers do more work. 
+
+*Private P2P*: Private network where peers must mutually trust each other before connecting, can either be F2F or group-based.
+
+*Group-based P2P network*: A private p2p network where you need some form of access to join, but within group you can connect to new peers, e.g. friend of a friend or a private BT tracker.
+
 **These have yet to be filled out**
 *Consistency model*: ...
+
 *Mostly-offline:* ...
+
 *Network churn:* ...
+
 *Light node:* ...
-*Private P2P*: ...
-*Structured P2P network*: ...
-*Unstructed P2P network*: ...
-*Super-peer P2P network*: ...
-*Group-based P2P network*: ...
+
 *Cryptographic hash function*: ...
+
 *Multi-device:*...
+
 *Robustness*: ...
+
 *Privacy-preservation*: ...
+
 *Censorship-resistance*: ...
+
 *Coercion-resistance*: ...
+
 ## 3. Methodology
   We look at generally established dimensions in the literature [xx1], and evaluate protocols and applications based on these. Additionally we add some dimensions that aren't necessarily captured in the literature, such as mobile-friendliness and practical implementation. Specifically the focus is on p2p applications that perform some form of data synchronization, with a bias towards secure messaging applications.
 
@@ -73,7 +90,7 @@ All notes are tentative and are based on the provided documentation and specific
 
 ### Compared dimensions
 
-**Request for comments: What's a  better way to decompose these properties? Ideally something like 2-5 dimensions that matter most. Right now it reads a bit like a laundry list, or like an ad hoc classification.*
+**Request for comments: What's a  better way to decompose these properties? Ideally something like 2-5 dimensions that matter most. Right now it reads a bit like a laundry list, or like an ad hoc classification. Update April 1: Factored other considerations out into guarantees and practical application/protocol considerations. Also tweaked How section to also deal with transport requirements and peer discovery.**
 
 These dimensions are largely taken from the survey paper by Martins as well, with some small tweaks. To make it easier to survey, we divide up the dimensions into rough sections.
 
@@ -94,15 +111,19 @@ Replication control mechanisms.
 - *Replica placement*. Full or partial replication.
 
 #### 4. How are they syncing?
-- *P2P Toplogy*.
+- *P2P Topology*. Public or private P2P? Unstructured/structured/super-peer or friend-to-friend/group-based?
+- *Peer Discovery*. How do peers discover and connect with each other?
+- *Transport requirements*. Any specific requirements on the underlying transport layer?
 
-#### 5. Other considerations
+#### 5. What guarantees does it provide?
 - *Consistency-model*. What are the guarantees provided?
-- *Mobile friendliness*. Any specific considerations for mobile?
 - *Privacy-preservation*. Assuming underlying layers provide privacy, are these guarantees upheld?
-- *Protocol upgradability*. Are there any mechanisms for upgrading the protocol?
+
+#### 6. Engineering and application, how does it work in practice?
 - *Actively used*. Is an instance of the protocol used in the real-world?
+- *Mobile friendliness*. Any specific considerations for mobile?
 - *Well-defined spec*. Is there a well-defined and documented spec to refer to?
+- *Protocol upgradability*. Are there any mechanisms for upgrading the protocol?
 - *Framing considerations*. Does it support messages that don't need replication?
 
 ## Notes on single-master vs multi-master
@@ -116,13 +137,23 @@ However, if we look at what is semantically interesting for the user, this is us
 
 ## Compared technologies
 
-This includes both applications and specification. For example p2p messengers such as Briar/Bramble [xx2], Matrix [xx3] and Secure Scuttlebutt [xx4]. As well as general p2p storage solutions such as Swarm [xx5].
+**RFC: Which way is the most useful to look at it? Worried about confusion between the two, especially since many applications have tightly coupled set of protocols.**
+
+This includes both applications and specification. For example p2p messengers such as Briar (Bramble) [xx2], Matrix [xx3] and Secure Scuttlebutt (SSB) [xx4]. As well as general p2p storage solutions such as Swarm [xx5].
+
+In order to compare apples to apples, we compare Briar and Matrix as in how they de facto use sync. An additional consideration would be to compare Bramble and Matrix Server-to-Server API/spec directly. This also means Swarm doesn't necessarily make sense to compare directly to these applications.
+
+This application focus is justified by the following observations:
+
+a) most protocols in this space are young, underspecified and somewhat coupled with the application using them, especially compared to protocols such as IP/TCP/UDP/TLS/Bittorrent, etc
+
+b) we are ultimately interested in considerations that only manifest themselves as the protocol is used on e.g. mobile devices
 
 ## 4. Comparison
 
 ### What and why are we syncing?
 
-#### Bramble
+#### Briar
 
 *Problem domain*. Bramble is the protocol Briar uses for synchronizing application layer data. Briar is a messaging app, and application data can be events such as sending messages, joining a room, etc. 
  
@@ -132,11 +163,11 @@ This includes both applications and specification. For example p2p messengers su
 
 #### Matrix
 
-*Problem domain*. Matrix is a set of open HTTP APIs that allow for real-time synchronization and persistance of arbitrary JSON over a federation of servers. Often this is done in a room context, with participants talking to each other.
+*Problem domain*. Matrix is a set of open HTTP APIs that allow for real-time synchronization and persistance of arbitrary JSON over a federation of servers. Often this is done in a room context, with participants talking to each other. More generally, for messaging between humans.
 
 *Minimal unit of replication*. Messages that also form a DAG.
 
-*Read-only or read and write*.
+*Read-only or read and write*. Message domain so read and write. Individual messages are generally immutable.
 
 #### Secure Scuttlebutt
 
@@ -160,13 +191,12 @@ This includes both applications and specification. For example p2p messengers su
 
 #### Comparison
 
-*Problem domain*.
-
-*Minimal unit of replication*
-
-*Actual unit of replication*. 
-
-*Read-only or read and write*.
+| Dimension | Briar | Matrix | SSB | Swarm |
+|------------|------|------| ----| ---|
+| *Problem domain*. | Messaging  | Messaging | Social network | Storage |
+| *Minimal unit of replication* | Messages | Messages | Messages | Chunks |
+| *Actual unit of replication*.  | DAG | DAG  | Log | | 
+| *Read-only or read and write*. | Read and write | Read and write | Read and write | Read and write | 
 
 ### Who is participating?
 
@@ -180,42 +210,47 @@ This includes both applications and specification. For example p2p messengers su
 *Active vs passive replication*.
 
 #### Swarm
-*Active vs passive replication*.
+*Active vs passive replication*. In Swarm, nodes replicate data that they are "assigned" to by virtue of being close to it.
 
 #### Comparison
-*Active vs passive replication*.
+
+| Dimension | Briar | Matrix | SSB | Swarm |
+|------------|------|------| ----| ---|
+| Active replication? | Passive | Active | | Passive |
 
 ###  When and where are we syncing?
 
-#### Bramble
-*Single-master vs multi-master*. Anyone who has access to the DAG can
+#### Multi-master
+*Single-master vs multi-master*. Anyone who has access to the DAG can write to it. Each individual message is immutable and thus write-once. But it's multi-master since multiple people can update the principal data structure.
 
-*Synchronous (eager) vs asynchronous (lazy)*.
+*Synchronous (eager) vs asynchronous (lazy)*. Asynchronous, you write to your own node first.
 
-*If asynchronous, optimistic or not*.
+*If asynchronous, optimistic or not*. Optimistic, since each message update is a hash conflicts are likely to be rare.
 
 *Replica placement*. Full or partial replication.
 
 #### Matrix
-*Single-master vs multi-master*. Both entity and collection.
+*Single-master vs multi-master*. Essentially same as Briar. Multi-master.
 
-*Synchronous (eager) vs asynchronous (lazy)*.
+*Synchronous (eager) vs asynchronous (lazy)*. Partial, because there's a HTTP API to Matrix server that needs to acknowledge before a message is transmitted.
 
-*If asynchronous, optimistic or not*.
+*If asynchronous, optimistic or not*. Optimistic. Though there are sone considerations for the conflict resolutions when it comes to auth events, which are synced separately from normal message events. This is part of room state, which is a shared dictionary and they use room state resolution to agree on current state. This is in order to deal with soft failure / ban evasion prevention.
 
-*Replica placement*. Full or partial replication.
+More on ban evasion: In order to prevent user from evading bans by attaching to an older part of DAG. These events may be valid, but a federation homeserver checks if such an event passes the current state auth checks. If it does, homeserver doesn’t propagate it. A similar construct does not appear in Briar, since there’s no such federation contruct and there’s no global notion of the current state.
+
+*Replica placement*. Partial. DAG and homeserver can choose to get previous state when the join the network.
 
 #### Secure Scuttlebutt
-*Single-master vs multi-master*. Both entity and collection.
+*Single-master vs multi-master*. The principal data structure in SSB is a log, and only you can write to your own log. Single-master.
 
-*Synchronous (eager) vs asynchronous (lazy)*.
+*Synchronous (eager) vs asynchronous (lazy)*. Asynchronous, you add to your own log first.
 
-*If asynchronous, optimistic or not*.
+*If asynchronous, optimistic or not*. Optimistic.
 
-*Replica placement*. Full or partial replication.
+*Replica placement*. Full, because you start syncing your log from scratch.
 
 #### Swarm
-*Single-master vs multi-master*. Both entity and collection.
+*Single-master vs multi-master*.
 
 *Synchronous (eager) vs asynchronous (lazy)*.
 
@@ -224,111 +259,146 @@ This includes both applications and specification. For example p2p messengers su
 *Replica placement*. Full or partial replication.
 
 #### Comparison
-*Single-master vs multi-master*. Both entity and collection.
 
-*Synchronous (eager) vs asynchronous (lazy)*.
-
-*If asynchronous, optimistic or not*.
-
-*Replica placement*. Full or partial replication.
-
+| Dimension | Briar | Matrix | SSB | Swarm |
+|------------|------|------| ----| ---|
+| *Multi-master?*  | Mulit-master | Multi-master | Single-master | |
+| *Asynchronous?*  | Asynchronous | Partial | Asynchronous| |
+|  *Optimistic?*  | Optimistic | Optimistic | Optimistic | | 
+| *Replica placement*  | Partial | Partial | Full | 
 
 ### How are they syncing?
-#### Bramble
-*P2P Toplogy*.
-
-#### Matrix
-*P2P Toplogy*.
-
-#### Secure Scuttlebutt
-*P2P Toplogy*.
-
-#### Swarm
-*P2P Toplogy*.
-
-#### Comparison
-*P2P Toplogy*.
-
-
-### Other considerations
 
 #### Bramble
-*Consistency-model*. Casual consistency. Requires 
+*P2P Topology*. Multiple options, but basically friend to friend. Can work either directly over Bluetooth or Tor (Internet). For BT it works by directly connecting to known contact, i.e. friend to friend. For Tor it uses onion addresses , it also leverages a DHT (structured).
 
-*Mobile friendliness*.
+*Peer Discovery*. Usually add contact locally. beacon signal locally, then keep track of and update transport properties for each contact. Leverage Tor onion addresses.
 
-*Privacy-preservation*.
-
-*Protocol upgradability*.
-
-*Actively used*.
-
-*Well-defined spec*.
-
-*Framing considerations*.
+*Transport requirements*. Requires a transport layer security protocol which provides a secure channel between two peers. For Briar, that means Bramble Transport Protocol.
 
 #### Matrix
-*Consistency-model*.
+*P2P Topology*. Super-peer based on homeservers. Pure P2P discused discussed but not live yet.
 
-*Mobile friendliness*.
+*Peer Discovery*.
 
-*Privacy-preservation*.
-
-*Protocol upgradability*.
-
-*Actively used*.
-
-*Well-defined spec*.
-
-*Framing considerations*.
+*Transport requirements*. Written as a set of HTTP JSON API:s, so runs on HTTP. Though there are some alternative transports as well.
 
 #### Secure Scuttlebutt
-*Consistency-model*.
+*P2P Topology*. Private p2p, group-based.
 
-*Mobile friendliness*.
+*Peer Discovery*. Gossip-based, friends and then different levels of awareness 1-hop, 2-hop and 3-hop.
+
+*Transport requirements*.
+
+#### Swarm
+*P2P Topology*. Public structured DHT.
+
+*Peer Discovery*. Kademlia, and caching peers in various proximity bins.
+
+*Transport requirements*.
+
+#### Comparison
+
+| Dimension | Briar | Matrix | SSB | Swarm |
+|------------|------|------| ----| ---|
+|*P2P Topology* | F2F | Super-peer | Group-based | Structured |
+| *Peer Discovery* | | | | |
+| *Transport requirements*  | | | | | 
+
+### Guarantees provided
+
+#### Bramble
+*Consistency model*. Casual consistency, since each message encodes its (optional) message dependencies. This DAG is hidden for non-participants.
+
+*Privacy-preservation*. It is a friend to friend network, and preserves whatever privacy underlying layer provides, so it has Tor's properties, and for short-distance the threat model is justifably weaker due to the increased cost of surveillence. However, a peer knows when another message is received by the receiving ACK (though it is possible to delay sending this, if on wishes).
+
+#### Matrix
+*Consistency model*. DAG so casual consistency, generally speaking.
+
+*Privacy-preservation*.  Relies on homeservers, so sender and receiver anonymity not provided. Generally, if adversary controls homeserver they have a lot of information.
+
+#### Secure Scuttlebutt
+*Consistency model*. Sequential consistency due to append-only log for each participant.
 
 *Privacy-preservation*.
 
-*Protocol upgradability*.
+#### Swarm
+*Consistency model*.
 
-*Actively used*.
+*Privacy-preservation*.
+
+#### Comparison
+*Consistency model*.
+
+*Privacy-preservation*.
+
+| Dimension | Briar | Matrix | SSB | Swarm |
+|------------|------|------| ----| ---|
+|*Consistency model* | Casual | Casual | Sequential | |
+| *Privacy-preservation* | Yes | | | |
+| *Transport requirements*  | | | | | 
+
+### Engineering and application
+
+#### Bramble
+*Actively used*. Released in the Play Store and on F-Droid. Seems like it, but not huge. ~300 reviews on Google Play Store, if that means anything.
+
+*Mobile friendliness*. Partial. Yes in that it is built for Android and works well, even without Internet and with high network churn. No in that battery is still an issue, and that it runs in the background. The latter makes an iOS app difficulty.
+
+*Well-defined spec*. Yes/Partial, see Bramble specifications. Not machine readable though.
+
+*Protocol upgradability*. Haven't seen any specific work in this area, though they do have multiple versioned specs, which generally seem based on accretion.
+
+*Framing considerations*. As far as I can tell this is not a consideration.
+
+#### Matrix
+*Actively used*. Matrix has users in the millions and there are multiple clients. So definitely.
+
+*Mobile friendliness*. Due to its super-peer architecture, mobile is straightforward and it can leverage basic HTTP PUT/long-lived GETs like normal messenger apps. DNS for homeservers can also be leveraged.
+
+*Well-defined spec*. Partial/Yes. Well-described enough to have multiple clients, but not machine-readable as far as I can tell.
+
+*Protocol upgradability*. Spec is versioned and rooms can have different versions that can be upgraded. Exact process around that is currently a bit unclear, though it does appear to have been a major consideration.
+
+*Framing considerations*. Matrix supports multiple forms of message types. Aside from synced Persisted Data Units (PDU) they also have Ephemeral (EDU) and queries. PDUs record history of message and state of room. EDUs don’t need to be replied to, necessarily. Queries are simple req/resp to get snapshot of state.
+
+#### Secure Scuttlebutt
+*Actively used*. In production and many clients. Unclear exactly how active.
+
+*Mobile friendliness*.
 
 *Well-defined spec*.
+
+*Protocol upgradability*.
 
 *Framing considerations*.
 
 #### Swarm
-*Consistency-model*.
+*Actively used*. Currently in POC testing phase with limited real-world usage.
 
 *Mobile friendliness*.
 
-*Privacy-preservation*.
+*Well-defined spec*.
 
 *Protocol upgradability*.
-
-*Actively used*.
-
-*Well-defined spec*.
 
 *Framing considerations*.
 
 #### Comparison
-*Consistency-model*.
 
-*Mobile friendliness*.
 
-*Privacy-preservation*.
-
-*Protocol upgradability*.
-
-*Actively used*.
-
-*Well-defined spec*.
-
-*Framing considerations*.
-
+| Dimension | Briar | Matrix | SSB | Swarm |
+|------------|------|------| ----| ---|
+|*Actively used* | Yes | Very | Yes | POC |
+| *Mobile friendliness* | Partial | Yes | | |
+| *Well-defined spec*  | Partial | Partial | | | 
+| *Protocol upgradability* | | | | 
+| *Framing considerations* | No | Yes | | 
 
 ### Table Summary
+
+**RFC: Does a full table summary makes sense? Should it list all dimensions? What would be the most useful?**
+
 | Dimension | Bramble | Matrix | SSB | Swarm |
 | ---------- | -------- | -------- | --- |--- | 
 | Replication object | Message (DAG) | Message* (DAG/*) | Messages (?) (Log) | Chunks (File/Manifest) |
@@ -339,6 +409,10 @@ This includes both applications and specification. For example p2p messengers su
 | Consistency model | Casual consistency | Casual | Eventual / Casual |
 | Active replication? | No | Yes | Yes | Yes |
 | P2P Topology | F2F Network | Super-peer | Group-based | Structured |
+
+#### Brief discussion
+
+What these results mean. Things that come together or not, independent considerations.
 
 ## 5. Summary
 
@@ -397,7 +471,7 @@ Elaborate on what problem CRDTs solve, their consistency model and problem domai
 The dimensions right now reads like a laundry list, and I'm not confident these are orthogonal considerations. Especially the "other considerations" section. Ideally there'd be just a few different dimensions that matter the most, with possible sub problems. A la principal component analysis, likely only a few really fundamental differences. Related to breaking things apart into similarties and differences.
 
 **4. Extend comparison with more applications and protocols.**
-E.g. Bittorrent, Git, Tribler, IPFS, Whispre, Status. Revisit Tox/TokTok.
+E.g. Bittorrent, Git, Tribler, IPFS, Whisper, Status. Revisit Tox/TokTok.
 
 **5. Clarify requirements of sync protocol in question.**
 E.g. if it has transport requirements or certain protocol dependencies. This also relates to how tightly coupled a sync protocol is to other protocols. It is also relevant for engineering reality.
@@ -410,3 +484,9 @@ I.e. all of these https://discuss.status.im/t/data-sync-next-steps-and-considera
 
 **8. Peer discovery.**
 Capture how who wants to sync finds each other. Consider how encryption plays a role here in terms of visibility.
+
+**9. User-centric, capture client implementers and requirements.**
+The user of a data sync layer is the sync client writer, not end user. What do they want to think about and not think about? Capture requirements better.
+
+**10. Separate out Swarm vs IPFS storage and distribution comparison.**
+Looking at similarities and differences between these probably more informative, even though there's overlap. Also keeps the comparison scope more tight.
