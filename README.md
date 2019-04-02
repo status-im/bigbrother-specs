@@ -63,9 +63,21 @@ Throughout the design of the stack we follow the SOLID design principles, redefi
  - **I**nterface segregation principle: @TODO
  - **D**ependency inversion principle: @TODO
  
+## Stack
+
+The below table shows the intended layers of the network from the *highest* to the *lowest*.
+
+| Layer / Protocol  | Purpose                         | Example                       |
+|-------------------|---------------------------------|-------------------------------| 
+| Sync Clients      | End user functionality          | 1:1, group chat, tribute, ... |
+| Data Sync         | Syncing data/state              | Bramble Sync Protocol (ish)   |
+| Secure Transport  | Confidentiality, PFS, etc       | Double Ratchet                |
+| Transport Privacy | Metadata protection             | Mixnet?                       |
+| P2P Overlay       | Overlay routing, NAT traversal  | libp2p?                       |
+ 
 ## Phases
 
-Inspired by the ETH 2.0 implementation process, we have decided to roll out BigBrother in multiple phases. The phases represent layers in the protocol which are sometimes more loosely coupled than ETH 2.0 components. Thus some layer may be implemented in parallel.
+Inspired by the ETH 2.0 implementation process, we have decided to roll out BigBrother in multiple phases. The phases can mostly be linked to various layers in the [stack](#stack). Some of these phases are sometimes more loosely coupled than ETH 2.0 components meaning they can be done in parallel as only the communication API is relevant.
 
 ### Phase 0 - [XKEYSCORE (Data Sync)](/data_sync/README.md)
 
