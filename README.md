@@ -13,7 +13,9 @@
   - [Phase 0](#phase-0---xkeyscore-data-sync)
   - [Phase 1](#phase-1---bullrun-transport-privacy-layer)
   - [Phase 2](#phase-2---stoneghost-p2p-overlay)
-  - [Phase 3](#)
+  - [Phase 3](#phase-3---credible-secure-transport)
+  - [Phase 4](#phase-4---cointelpro-data-sync-clients)
+  - [Phase 5](#phase-5---nativeflora-trust-establishment)
 - [Footnotes](#footnotes)
 
 ## Abstract
@@ -63,7 +65,7 @@ Throughout the design of the stack we follow the SOLID design principles, redefi
  
 ## Phases
 
-Inspired by the ETH 2.0 implementation process, we have decided to roll out BigBrother in multiple phases. The phases represent layers in the protocol which are sometimes more loosely coupled than ETH 2.0 components.
+Inspired by the ETH 2.0 implementation process, we have decided to roll out BigBrother in multiple phases. The phases represent layers in the protocol which are sometimes more loosely coupled than ETH 2.0 components. Thus some layer may be implemented in parallel.
 
 ### Phase 0 - [XKEYSCORE (Data Sync)](/data_sync/README.md)
 
@@ -71,10 +73,18 @@ Inspired by the ETH 2.0 implementation process, we have decided to roll out BigB
 
  - Mixnet
  - [PSS](https://gist.github.com/zelig/d52dab6a4509125f842bbd0dce1e9440)
+ - Bluetooth local network
+ - Sneakernet
 
 ### Phase 2 - STONEGHOST (P2P Overlay)
 
-### Phase 3 - @TODO NEEDS CODE NAME (MLS - Message Layer Security)
+### Phase 3 - CREDIBLE (Secure Transport)
+
+- Message Layer Security (MLS)
+
+### Phase 4 - COINTELPRO / JTRIG OPS (Data Sync Clients)
+
+### Phase 5 - NATIVEFLORA / TAO OPS (Trust Establishment)
 
 ## Footnotes
 
