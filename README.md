@@ -14,8 +14,8 @@
   - [Phase 1](#phase-1---bullrun-transport-privacy-layer)
   - [Phase 2](#phase-2---stoneghost-p2p-overlay)
   - [Phase 3](#phase-3---credible-secure-transport)
-  - [Phase 4](#phase-4---cointelpro-data-sync-clients)
-  - [Phase 5](#phase-5---nativeflora-trust-establishment)
+  - [Phase 4](#phase-4---cointelpro--jtrig-ops-data-sync-clients)
+  - [Phase 5](#phase-5---nativeflora--tao-ops-trust-establishment)
 - [Footnotes](#footnotes)
 
 ## Abstract
@@ -37,19 +37,13 @@ The family of protocols SHOULD be flexible enough to allow various use case impl
 
 ## Design Goals
 
-**1. Anonymity** - `sender` / `receiver` MUST remain anonymous.
-
-**2. Unlinkability** - It should not be identifiable which parties are talking to eachother. 
-
-**3. Scalable** - @TODO
-
-**4. Incentivized** - @TODO
-
-**5. Decentralized** - @TODO
-
-**6. Resistant** - @TODO
-
-**8. Inclusive** - Protocols within the stack should be designed to work on resource restricted devices, this allows for a higher participation making the entire BigBrother protocol more usable and reliable. 
+1. **Anonymity** - `sender` / `receiver` MUST remain anonymous.
+1. **Unlinkability** - It should not be identifiable which parties are talking to eachother. 
+1. **Scalable** - @TODO
+1. **Incentivized** - @TODO
+1. **Decentralized** - @TODO
+1. **Resistant** - @TODO
+1. **Inclusive** - Protocols within the stack should be designed to work on resource restricted devices, this allows for a higher participation making the entire BigBrother protocol more usable and reliable. 
 
 ## System Design / Architecture
 
