@@ -81,7 +81,7 @@ These dimensions are largely taken from the survey paper by Martins as well, wit
 
 #### 1. Why and what are we syncing?
 - *Problem domain*. Why are we syncing stuff in the first place?
-- *Minimal unit of replication* . The minimal entity that we can replicate. The actual unit of replication is the data structure that we are interested in, usually a collection of entities. Related: version history abstraction (linear vs DAG).
+- *Minimal unit of replication*. The minimal entity that we can replicate. The actual unit of replication is the data structure that we are interested in, usually a collection of entities. Related: version history abstraction (linear vs DAG).
 - *Read-only or read and write*. Is the (actual unit of replication) data static or not?
 
 #### 2. Who is participating?
