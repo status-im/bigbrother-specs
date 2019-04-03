@@ -186,7 +186,7 @@ b) we are ultimately interested in considerations that only manifest themselves 
 ### Who is participating?
 
 #### Bramble
-*Active vs passive replication*. In Bramble, only the participants in a group chat are syncing messages. It is thus a form of passive replication. There have some proposals to have additional nodes to help with offline inboxing.
+*Active vs passive replication*. In Bramble, only the participants in a group chat are syncing messages. It is thus a form of passive replication. There are some proposals to have additional nodes to help with offline inboxing.
 
 #### Matrix
 *Active vs passive replication*. In Matrix, homeservers are used for replication. Homeservers themselves don't care about the messages, so it is a form of active replication.
@@ -210,7 +210,7 @@ b) we are ultimately interested in considerations that only manifest themselves 
 
 *Synchronous (eager) vs asynchronous (lazy)*. Asynchronous, you write to your own node first.
 
-*If asynchronous, optimistic or not*. Optimistic, since each message update is a hash conflicts are likely to be rare.
+*If asynchronous, optimistic or not*. Optimistic, since each message update is a hash, conflicts are likely to be rare.
 
 *Replica placement*. Full or partial replication.
 
