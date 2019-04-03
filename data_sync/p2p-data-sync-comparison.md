@@ -71,7 +71,7 @@ Let's start with a raw list of definitions. These are phrases with some specific
 ## 3. Methodology
   We look at generally established dimensions in the literature [xx1], and evaluate protocols and applications based on these. Additionally we add some dimensions that aren't necessarily captured in the literature, such as mobile-friendliness and practical implementation. Specifically the focus is on p2p applications that perform some form of data synchronization, with a bias towards secure messaging applications.
 
-All notes are tentative and are based on the provided documentation and specification. Code has generally not been looked into, nor has any empirical simulations been performed. These results are tentative as they have yet to be reviewed.
+All notes are tentative and are based on the provided documentation and specification. Code has generally not been looked into, nor have any empirical simulations been performed. These results are tentative as they have yet to be reviewed.
 
 ### Compared dimensions
 
