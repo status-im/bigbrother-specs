@@ -343,7 +343,7 @@ More on ban evasion: In order to prevent user from evading bans by attaching to 
 #### Bramble
 *Actively used*. Released in the Play Store and on F-Droid. Seems like it, but not huge. ~300 reviews on Google Play Store, if that means anything.
 
-*Mobile friendliness*. Partial. Yes in that it is built for Android and works well, even without Internet and with high network churn. No in that battery is still an issue, and that it runs in the background. The latter makes an iOS app difficulty.
+*Mobile friendliness*. Partial. Yes in that it is built for Android and works well, even without Internet and with high network churn. Note that battery consumption is still an issue, and that it runs in the background. The latter makes an iOS app difficulty.
 
 *Well-defined spec*. Yes/Partial, see Bramble specifications. Not machine readable though.
 
