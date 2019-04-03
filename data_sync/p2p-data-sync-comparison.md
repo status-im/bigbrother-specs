@@ -38,7 +38,7 @@ Let's start with a raw list of definitions. These are phrases with some specific
 | Data sync | Achieving *consistency* among a set of nodes storing data |
 | Mobile-friendly | Multiple factors that together make a solution suitable for mobile. These are things such as dealing with *mostly-offline* scenarios, *network churn*, *limited resources* (such as bandwidth, battery, storage or compute). |
 | Replication object | Also known as the minimal unit of replication, the thing that we are replicating. |
-|F riend-to-friend network (F2F) | A private P2P network where there are only connections between mutually trusted peers. |
+| Friend-to-friend network (F2F) | A private P2P network where there are only connections between mutually trusted peers. |
 | Content addressable storage (CAS) | Storing information such that it can be retrieved by its content, not its location. Commonly performed by the use of cryptographic hash functions. |
 | Public P2P | Open network where peers can connect to each other. |
 | Structured P2P network | A public p2p network where data placement is related to the network topology. E.g. a DHT. |
