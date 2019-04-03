@@ -205,7 +205,7 @@ b) we are ultimately interested in considerations that only manifest themselves 
 
 ###  When and where are we syncing?
 
-#### Multi-master
+#### Briar
 *Single-master vs multi-master*. Anyone who has access to the DAG can write to it. Each individual message is immutable and thus write-once. But it's multi-master since multiple people can update the principal data structure.
 
 *Synchronous (eager) vs asynchronous (lazy)*. Asynchronous, you write to your own node first.
