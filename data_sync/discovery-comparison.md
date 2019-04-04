@@ -1,4 +1,4 @@
-# Discovery
+# P2P Discovery Comparison
 
 An open question for the [Data Sync layer](README.md) is how nodes find peers. There are various protocols that can be used, however our use case requires one which is light-weight and mobile-friendly.
 
