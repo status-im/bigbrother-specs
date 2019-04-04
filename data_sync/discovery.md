@@ -16,4 +16,4 @@
  
 ## Secure Scuttlebutt
 
-## [Rendezvous](https://github.com/libp2p/specs/pull/44)
+## [Rendezvous](http://github.com/libp2p/specs/pull/56)
