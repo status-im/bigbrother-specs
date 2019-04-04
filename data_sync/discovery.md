@@ -15,3 +15,5 @@
  - Running a DHT on a mobile client
  
 ## Secure Scuttlebutt
+
+## [Rendezvous](https://github.com/libp2p/specs/pull/44)
