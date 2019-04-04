@@ -19,3 +19,9 @@ In this document we will look at common discovery protocols and analyze each of 
 ## Secure Scuttlebutt
 
 ## [Rendezvous](http://github.com/libp2p/specs/pull/56)
+
+**Pros**
+ - Leightweight
+ 
+**Cons**
+ - Susceptible to spam attacks
