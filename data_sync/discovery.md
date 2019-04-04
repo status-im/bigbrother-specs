@@ -9,6 +9,7 @@ A node is added to the set of nodes unless a challenge was voted valid by `2/3` 
 
 ## Further Reading
  - [P2P Discovery Comparison](discovery-comparison.md)
+ - [Bootstrap Nodes Smart Contract](https://discuss.status.im/t/bootstrap-nodes-smart-contract/1135)
 
 ## Footnotes
  [1] https://medium.com/@decanus/optimistic-contracts-fb75efa7ca84
