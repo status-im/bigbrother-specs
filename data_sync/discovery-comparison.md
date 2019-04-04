@@ -18,7 +18,7 @@ In this document we will look at common discovery protocols and analyze each of 
  
 ## Secure Scuttlebutt
 
-## [Rendezvous](http://github.com/libp2p/specs/pull/56)
+## [Rendezvous](https://github.com/libp2p/specs/tree/e1083c1f9d8f7afc0d65a43a12b05492f3873385/rendezvous)
 
 **Pros**
  - Leightweight
