@@ -13,3 +13,5 @@
  
 **Cons**
  - Running a DHT on a mobile client
+ 
+## Secure Scuttlebutt
