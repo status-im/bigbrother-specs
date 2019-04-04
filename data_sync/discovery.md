@@ -7,5 +7,8 @@ A node is added to the set of nodes unless a challenge was voted valid by `2/3` 
 
 *We consider this approach naive and requiring further investigation.*
 
+## Further Reading
+ - [P2P Discovery Comparison](discovery-comparison.md)
+
 ## Footnotes
  [1] https://medium.com/@decanus/optimistic-contracts-fb75efa7ca84
