@@ -24,4 +24,4 @@ In this document we will look at common discovery protocols and analyze each of 
  - Leightweight
  
 **Cons**
- - Susceptible to spam attacks
+ - Susceptible to spam attacks (suggest PoW for anti-spam, this is no longer mobile friendly)
