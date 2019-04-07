@@ -1,8 +1,10 @@
 # P2P Discovery Comparison
 
-An open question for the [Data Sync layer](README.md) is how nodes find peers. There are various protocols that can be used, however our use case requires one which is light-weight and mobile-friendly.
+**WARNING: This is an early draft, and likely contains errors.**
 
-In this document we will look at common discovery protocols and analyze each of them highlighting their pros and cons.
+This document comparse various protocols and methods used for peer discovery in p2p networks, with the intention of making it easier to chose one for any specific use case. It is part of a larger series on secure messaging, and therefore will likely contain certain biases towards that use-case.
+
+> Request for comments: Please direct comments on this document to @decanus. These comments can be on the structure, content, things that are wrong, things that should be looked into more, things that are unclear, as well as anything else that comes to mind.
 
 ## [Kademlia](https://en.wikipedia.org/wiki/Kademlia)
 
