@@ -1,4 +1,4 @@
-# P2P Discovery Comparison
+# Approaches to discovery in P2P networks
 
 *Written April 8th, 2019 by Dean Eigenmann*
 
