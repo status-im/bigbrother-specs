@@ -4,7 +4,7 @@
 
 **WARNING: This is an early draft, and likely contains errors.**
 
-This document compares various protocols and methods used for peer discovery in p2p networks, with the intention of making it easier to choose one for any specific use case. It is part of a larger series on secure messaging, and therefore will likely contain certain biases towards that use case.
+In this paper, we compare various protocols and methods used for peer discovery in p2p networks, with the intention of making it easier to choose one for any specific use case. It is part of a larger series on secure messaging, and therefore will likely contain certain biases towards that use case.
 
 > Request for comments: Please direct comments on this document to @decanus. These comments can be on the structure, content, things that are wrong, things that should be looked into more, things that are unclear, as well as anything else that comes to mind.
 
