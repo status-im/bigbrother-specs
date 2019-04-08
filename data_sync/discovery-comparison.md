@@ -45,10 +45,10 @@ We first create a general overview of the various methods, highlighting their ne
 
 ## Comparison
 
-| Method | Type | Fault Tolerance | Cost Lookup | Query Efficiency |
-|---|---|---|---|---|
-| Gnutella   | Unstructured | | | Poor |
-| Kademlia   | Structured   | | | Good |
+| Method     | Type         | Fault Tolerance | Cost Lookup | Query Efficiency |
+|------------|--------------|-----------------|-------------|------------------|
+| Gnutella   | Unstructured | Random          | O(n)        | Poor             |
+| Kademlia   | Structured   | Good            | O(log n)    | Good             |
 | SSB        | | | | |
 | Rendezvous | | | | |
 
