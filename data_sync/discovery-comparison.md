@@ -47,8 +47,8 @@ We first create a general overview of the various methods, highlighting their ne
 
 | Method | Type | Fault Tolerance | Cost Lookup | Query Efficiency |
 |---|---|---|---|---|
-| Gnutella   | | | | |
-| Kademlia   | | | | |
+| Gnutella   | Unstructured | | | Poor |
+| Kademlia   | Structured   | | | Good |
 | SSB        | | | | |
 | Rendezvous | | | | |
 
