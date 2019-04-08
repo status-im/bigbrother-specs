@@ -47,7 +47,7 @@ The notes presented below are based on provided documentation and specification,
 
 ## References
 
-1. [L. Oliveira, I. Siqueira, D. Macedo, A. Loureiro, H. Wong and J. Nogueira "Evaluation of Peer-to-Peer Network Content Discovery Techniques over Mobile Ad Hoc Networks"](https://arxiv.org/pdf/1408.3079.pdf)
+1. [L. Oliveira, I. Siqueira, D. Macedo, A. Loureiro, H. Wong and J. Nogueira "Evaluation of Peer-to-Peer Network Content Discovery Techniques over Mobile Ad Hoc Networks"](http://www.cs.cmu.edu/~hcwong/Pdfs/p2pOverManets05.pdf)
 
 ---
 **OLD**
