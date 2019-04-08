@@ -29,7 +29,7 @@ The notes presented below are based on provided documentation and specification,
 
 ### Compared Dimensions
 
-We first create a general overview of the
+We first create a general overview of the various methods, highlighting their network type, fault tolerance, cost lookup and query efficiency.
 
 ## Compared technologies
 
