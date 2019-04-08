@@ -6,6 +6,40 @@ This document comparse various protocols and methods used for peer discovery in 
 
 > Request for comments: Please direct comments on this document to @decanus. These comments can be on the structure, content, things that are wrong, things that should be looked into more, things that are unclear, as well as anything else that comes to mind.
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Methodology](#methodology)
+3. [Compared technologies](#compared-technologies)
+4. [Comparison](#comparison)
+5. [Summary](#summary)
+6. [Acknowledgements](#acknowledgements)
+7. [References](#references)
+
+## Introduction
+
+## Methodology
+
+## Compared technologies
+
+@TODO Write some stuff on each technology, quick abstract
+
+### Kademlia
+
+### Secure Scuttlebutt
+
+### Rendezvous
+
+## Comparison
+
+## Summary
+
+## Acknowledgements
+
+## References
+
+---
+**OLD**
+
 ## [Kademlia](https://en.wikipedia.org/wiki/Kademlia)
 
 ### Reading
