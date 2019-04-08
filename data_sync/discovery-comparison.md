@@ -33,6 +33,8 @@ The notes presented below are based on provided documentation and specification,
 
 @TODO Write some stuff on each technology, quick abstract
 
+### Gnutella
+
 ### Kademlia
 
 ### Secure Scuttlebutt
