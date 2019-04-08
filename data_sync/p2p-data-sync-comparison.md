@@ -24,7 +24,7 @@ In this paper we go through various approaches to data sync in a p2p context. We
 
 ## 2. Background and definitions
 
-Let's start with a raw list of definitions. These are phrases with some specific meaning that we'll use further down the line. Some of it the terms are general, and some are more specific to data sync in particular.
+For broad definitions please refer to the [glossary](/glossary.md), data sync specific definitions will be listed below.
 
 | Term | Definition |
 | ---- | ---------- |
