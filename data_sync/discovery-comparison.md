@@ -23,6 +23,10 @@ An important aspect of p2p networks is the actual discovery of peers, this dicta
 
 ## Methodology
 
+Literature comparing various discovery methods for p2p networks seems rather limited, therefore most of the methodologies used within this paper are not based on previous literature. The literature found is mainly based on simulations focusing on performance comparisons of these various methods.<sup>1</sup>
+
+The notes presented below are based on provided documentation and specification, code has not been looked at generally or fully reviewed. All results are tentative.
+
 ### Compared Dimensions
 
 ## Compared technologies
@@ -42,6 +46,8 @@ An important aspect of p2p networks is the actual discovery of peers, this dicta
 ## Acknowledgements
 
 ## References
+
+1. [L. Oliveira, I. Siqueira, D. Macedo, A. Loureiro, H. Wong and J. Nogueira "Evaluation of Peer-to-Peer Network Content Discovery Techniques over Mobile Ad Hoc Networks"](https://arxiv.org/pdf/1408.3079.pdf)
 
 ---
 **OLD**
