@@ -19,6 +19,8 @@ This document compares various protocols and methods used for peer discovery in 
 
 ## Introduction
 
+An important aspect of p2p networks is the actual discovery of peers, this dictates how a node finds other nodes in the network. It can also determine how on which nodes information is stored and whom a node most connect to in order to retrive said information. In this paper we analyze various methods for peer discovery, what network types they work for and what their benefits and drawbacks are when applying various limitations such as the challenge of running these methods on mobile devices.
+
 ## Methodology
 
 ## Compared technologies
