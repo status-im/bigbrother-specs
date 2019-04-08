@@ -23,11 +23,13 @@ An important aspect of p2p networks is the actual discovery of peers, this dicta
 
 ## Methodology
 
-Literature comparing various discovery methods for p2p networks seems rather limited, therefore most of the methodologies used within this paper are not based on previous literature.
+Literature comparing various discovery methods for p2p networks seems rather limited, therefore most of the methodologies used within this paper are not based on previous literature. **TODO, probably not best said like this**
 
 The notes presented below are based on provided documentation and specification, code has not been looked at generally or fully reviewed. All results are tentative.
 
 ### Compared Dimensions
+
+We first create a general overview of the
 
 ## Compared technologies
 
@@ -48,6 +50,8 @@ The notes presented below are based on provided documentation and specification,
 ## Acknowledgements
 
 ## References
+
+1. [S. Masood, M. Shahid, M. Sharif and M. Yasmin "Comparative Analysis of Peer to Peer Networks"](http://oaji.net/articles/2017/2698-1520328416.pdf)
 
 ---
 **OLD**
