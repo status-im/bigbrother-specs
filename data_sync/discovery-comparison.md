@@ -23,6 +23,8 @@ An important aspect of p2p networks is the actual discovery of peers, this dicta
 
 ## Methodology
 
+### Compared Dimensions
+
 ## Compared technologies
 
 @TODO Write some stuff on each technology, quick abstract
