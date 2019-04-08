@@ -39,11 +39,18 @@ We first create a general overview of the various methods, highlighting their ne
 
 ### Kademlia
 
-### Secure Scuttlebutt
+### Secure Scuttlebutt (SSB)
 
 ### Rendezvous
 
 ## Comparison
+
+| Method | Type | Fault Tolerance | Cost Lookup | Query Efficiency |
+|---|---|---|---|---|
+| Gnutella   | | | | |
+| Kademlia   | | | | |
+| SSB        | | | | |
+| Rendezvous | | | | |
 
 ## Summary
 
