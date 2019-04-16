@@ -50,7 +50,7 @@ We first create a general overview of the various methods, highlighting their ne
 | Gnutella   | Unstructured | Random          | O(n)        | Poor             |
 | Kademlia   | Structured   | Good            | O(log n)    | Good             |
 | SSB        | | | | |
-| Rendezvous | | | | |
+| Rendezvous | | | O(n) | |
 
 ## Summary
 
