@@ -1,5 +1,7 @@
 # Data Sync
 
+The data sync protocol defines the protocol with which clients interact. It interacts directly with the secure transport layer. 
+
 @todo: Do nodes chose what they want to sync?
 
 ## Assumptions 
