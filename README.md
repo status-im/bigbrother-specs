@@ -86,7 +86,7 @@ Inspired by the ETH 2.0 implementation process, we have decided to roll out BigB
 
 ### Phase 2 - STONEGHOST (P2P Overlay)
 
-### Phase 3 - CREDIBLE (Secure Transport)
+### Phase 3 - [CREDIBLE (Secure Transport)](/secure_transport/README.md)
 
 - Message Layer Security (MLS)
 
