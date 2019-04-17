@@ -2,4 +2,5 @@ theme: minima
 
 header_pages:
   - data_sync/README.md
+  - secure_transport/READEME.md
   - glossary.md
