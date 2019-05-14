@@ -79,7 +79,57 @@ These can be mitigated to various degrees by using things like PSS, topic negoti
 
 ## Problem motivation
 
+Why do we want to do p2p sync for mobilephones in the first place? There's three components to that question. One is on the valuation of decentralization and peer-to-peer, the second is on why we'd want to reliably sync data at all, and finally why mobilephones and other resource restricted devices.
+
+For decentralization and p2p, there are various reasons, both technical and social/philosophical in nature. Technically, having a user run network means it can scale with the number of users. Data locality is also improved if you query data that's close to you, similar to distributed CDNs. The throughput is also improved if there are more places to get data from.
+
+Socially and philosophically, there are several ways to think about it. Open and decentralized networks also relate to the idea of open standards, i.e. compare AOL with IRC or Bittorrent and the longevity. One is run by a company and is shutdown as it stops being profitable, the others live on. Additionally increasingly control of data and infrastructure is becoming a liability [xx]. By having a network with no one in control, everyone is. It's ultimately a form of democratization, more similar to organic social structures pre Big Internet companies. This leads to properties such as censorship resistance and coercion resistance, where we limit the impact a 3rd party might have a voluntary interaction between individuals or a group of people. Examples of this are plentiful in the world of Facebook, Youtube and Twitter.
+
+For reliably syncing data at all, it's often a requirement for many problem domains. You don't get this by default in a p2p world, as it is extra unreliable with nodes permissionslessly join and leave the network. In some cases you can get away with only ephemeral data, but usually you want some kind of guarantees. This is a must for reliable group chat experience, for example, where messages are expected to arrive in a timely fashion and in some reasonable order. The same is true for messages there represent financial transactions, and so on.
+
+Why mobilephones? We live in an increasingly mobile world, and most devices people use daily are mobile phones. It's important to provide the same or at least similar guarantees to more traditional p2p nodes that might run on a desktop computer or computer. The alternative is to rely on gateways, which shares many of the drawbacks of centralized control and prone to censorship, control and surveillence.
+
+More generally, resource restricted devices can differ in their capabilities. One example is smartphones, but others are: desktop, routers, Raspberry PIs, POS systems, and so on. The number and diversity of devices are exploding, and it's useful to be able to leverage this for various types of infrastructure. The alternative is to centralize on big cloud providers, which also lends itself to lack of democratization and censorship, etc.
+
+### Minimal Requirements
+
+In terms of minimal requirements or design goals for a solution we propose the following.
+
+
+
+1. MUST sync data reliably between devices.
+By reliably we mean having the ability to deal with messages being out of order, dropped, duplicated, or delayed.
+
+2. MUST NOT rely on any centralized services for reliability.
+By centralized services we mean any single point of failure that isn’t one of the endpoint devices.
+
+3. MUST allow for mobile-friendly usage.
+By mobile-friendly we mean devices that are resource restricted, mostly-offline and often changing network.
+
+4. MAY use helper services in order to be more mobile-friendly.
+Examples of helper services are decentralized file storage solutions such as IPFS and Swarm. These help with availability and latency of data for mostly-offline devices.
+
+5. MUST have the ability to provide casual consistency.
+By casual consistency we mean the commonly accepted definition in distributed systems literature. This means messages that are casually related can achieve a partial ordering.
+
+6. MUST support ephemeral messages that don’t need replication.
+That is, allow for messages that don’t need to be reliabily transmitted but still needs to be transmitted between devices.
+
+7. MUST allow for privacy-preserving messages and extreme data loss.
+By privacy-preserving we mean things such as exploding messages (self-destructing messages). By extreme data loss we mean the ability for two trusted devices to recover from a, deliberate or accidental, removal of data.
+
+8. MUST be agnostic to whatever transport it is running on.
+It should not rely on specific semantics of the transport it is running on, nor be tightly coupled with it. This means a transport can be swapped out without loss of reliability between devices.
+
+We've already expanded on the rationale for 1-3. Let's briefly expand on the need for the other requirements. For 4, the reality is that mobile devices are largely offline, and you need somewhere to get data from. To get reasonable latency, this requires some additional form of helper service. It also ties into 3, which is to allow for a good UX on mobile, which means reliable and reasonable latency.
+
+5 is a must to at least be able provide casual ordering between events, though it is up to clients of the protocol to use this or no. 6 is useful for non important messages, such as typing notifications, discovery beacons, and so on. The alternative here is to use a separate protocol, which would make this data sync layer less pluggable and general for various types of transports. It is similar to TCP and UDP running on IP. This also ties into 8, where the protocol should be able to use any underlying transport from device to device.
+
+For 7, this is often a desirable feature for secure messaging applications. The idea is that you want to do exploding messages, or maybe wipe your device if you are afraid of local seizure [xx]. This is an explicit requirement as otherwise you get into hairy solutions when for example repairing a DAG.
+
 ## Solution
+
+
 
 ## Proof-Evaluation-Simulation
 
