@@ -95,8 +95,6 @@ More generally, resource restricted devices can differ in their capabilities. On
 
 In terms of minimal requirements or design goals for a solution we propose the following.
 
-
-
 1. MUST sync data reliably between devices.
 By reliably we mean having the ability to deal with messages being out of order, dropped, duplicated, or delayed.
 
@@ -127,13 +125,54 @@ We've already expanded on the rationale for 1-3. Let's briefly expand on the nee
 
 For 7, this is often a desirable feature for secure messaging applications. The idea is that you want to do exploding messages, or maybe wipe your device if you are afraid of local seizure [xx]. This is an explicit requirement as otherwise you get into hairy solutions when for example repairing a DAG.
 
-## Solution
+## Solution / System Model
+
+We propose a protocol that's heavily inspired by BSP, with some tweaks, some minor and some major. Let's first introduce BSP in more detail as specified before diving into enhancements.
+
+We synchronize messages between devices. Each device has a set of peers, of which it chooses a subset to which it wants to synchronize messages with. Each synchronization happens within a data group, and in a data group there's a set of immutable messages. Each message has a message id that identifies it.
+
+There are the following message types: OFFER, ACK, SEND, REQUEST. ACK acknowledges a set of message IDs, whereas REQUEST requsests it. OFFER offers a set of message ids without sending them, whereas SEND sends the actual messages. Depending on their sharing policy, a client can choose to OFFER messages or SEND messages first, depending on if latency (roundtrips) or bandwidth (payloads) is at a premium.
+
+**Tweak 1:** For payloads we propose using Protobuf to allow for upgradability and implementation in multiple languages. For wire protocol we use a slightly different one, see next major section for this.
+
+**Tweak 2:** One difference from BSP is that we allow multiple messages types to occur in one packet, so you can ACK messages at the same time as you OFFER messages. This is to allow for fewer roundtrips, as well as piggybacking ACKs. This is useful if a node might not want to disclose that they received a message straight away.
+
+A device keeps track of its peers that it is synchronizing data with. When a device sends a message, it starts by appending it locally to its own log. It then tries to OFFER or SEND messages to each of the peers it is sharing with. This is operating on a positive retransmission with ACKs basis, simlar to e.g. TCP/IP. It uses exponential backoff and keeps track of send count to ensure it doesn't send too many messages to an offline node.
+
+A receiving node might receive messages out of order. Inside the payload, a useful thing to have is a set of parent IDs. These are message dependencies that can be requested specifically before delivering the message. So a node knows what data it is missing, and can request it, by default from the sending node but additionally in other ways. Only once all message dependencies have been met does the message actually get delivered, as some order has been guaranteed. This is useful when casual consistency is needed, but isn't a strict requirement and it might be domain dependent.
+
+### Enhancement 1: Leveraging multicast
+
+Another difference with BSP is that we allow for leveraging multicast protocols. In these you might have a topic construct, which you know multiple receivers are listening to. If you are sending on a topic that you know a set of participants are listening to, this means a client counts this as a send to those participants. If you have 100 participant on a topic, this means a 100x factor improvement in bandwidth usage. A mapping is kept between known participants and a topic to facilitate this.
+
+As a specific example, if you have a group chat with 100 participants, you can ACK a set of messages. This means you publish this ACK (message ids) to a topic. As a result, all participants who are able to read this message knows you recevied it. Additionally, they are now aware that this is a message id that exists, and may choose to request it. However, this still has the drawback that each node sends ACKs to the same topic, which can lead to undesirable bandwidth consumption. This points to using ACKs less aggressively and leveraging more randomized and optimized approaches. These additional enhancements in case of large group chats are possibly, see below for more radical changes.
+
+This is an optional feature, as it isn't guaranteed the listeners of a topic are the intendendent recipients, which is a somewhat weaker assumption than friend to friend with mandatory trust establishment.
+
+### Enhancement 2: Swarm for replicated log
+
+One drawback mentioned earlier is that high churn is problematic. As a simple example, we can imagine a mobile node only being online 10% of the time. This means 9/10 sends will be failures, and this will cascade with failing to deliver ACKs, leading to more resends, and so on. Additionally, with exponential backoff and possibly offline devices at non-overlapping times, the latency might be unacceptable.
+
+The fundamental issue here is one of low-availability. How do we solve this without reverting back to centralized solutions? One such approach is to replicate the log remotely. Similar to what is done in Git, but ideally in a 'no one owns this way', which points to IPFS and Swarm. This enables an interesting property, where you can essentially upload and forget, and, assuming incentives around storage policy and so on work out, you can be reasonably sure the data is still there for you even if you lose your local copy.
+
+A replicated log can exist on Swarm and IPFS, assuming the message ids map to references used there. What Swarm Feeds provide is a way to show where the last message is, and doing so without requiring individual nodes to send or offer a message to that peer individually. This means as long you know which log to pull from, you can query it at some interval. Additionally, Swarm Feeds uses an adaptive algorithm that allows you to seamlessly communicate the expected update frequency.
+
+One downside of this is that it requires Internet access and a specific overlay network, currently devp2p. This is an optional enhancement, and there are many ways to replicate remote logs, the important thing is that the other node is aware of it.
+
+The way it'd work is as follows. A node commits a message to their local log, then they sync it to some decentralized file storage, such as Swarm or IPFS. This information is further confirmation that the data has been replicated and acts as a form of ACK where Swarm is seen as a node. Recipients then know, through previous communication with sender node, that they can look at this log. This means the two nodes don't need to be both online, and they can leverage Swarm, or other similar solutions, with less latency. Another way of looking at it is as chunks providing a linked list. Even if a similar solution lacks a feeds-like mechanism (e.g. like ENS or DNS), it can still be used for chunk storage, even though latency might be slighlty higher.
+
+### Enhancement 3: Dispersy Bloom Filters
+
+Another drawback mentioned in earlier section is that large group data sync contexts over multicast network lead to a lot of overhead due to each message being pairwise. By leveraging the multicast capability when it exists we mitigate this somewhat. However, a simple back of the envelope calculation shows that this might still be too much. If you have 100 nodes in a group context, a node sending a message over a topic results in 100 naive ACKs over topic. These can clumped together and so on but it's still an unacceptable bandwidth trade off. Without relaying on centralized intermediaries, this leads to ACKs being relaxed somewhat, while still ensuring we keep reliablity. One way of doing this is by using some of the ideas in DSP.
 
 
+## Specification and wire protocol
+
+
+
+### Example Clients
 
 ## Proof-Evaluation-Simulation
-
-## System Model
 
 ## Future work
 
