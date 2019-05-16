@@ -42,6 +42,10 @@ Matrix distinguishes between syncable messages and ephemeral messages, which all
 
 The super-peer archicture means there's only a simple TCP connection and no high availablity requirements for end users, which leads to a good user experience for mobile devices. However, it isn't pure peer to peer, and suffer many of the same centralizing aspects as other server based approaches, including security concerns, censorship resistance, and so on.
 
+### Secure Scuttlebutt (SSB)
+
+SSB is a form of group-based private p2p network based on trusted relationsihps append-only feeds. These feeds are single-master and offline/local by default. You can follow a feed to get updates from it, and  and by following a feed, and being followed, you become aware of more feeds. Essentially you see content 1-hop away, fetch in a cache content 2 hops away, and you are aware of 3 hop. The way bootstrapping works is that you connect to a known Pub server, which follows you back. By following you back, you become aware of the connection that pub has, and so on, in concentric circles, like a social graph owned by you. Feeds are unencrypted by default, and the way messaging works is that you post to your own feed with a message encrypted by the other person's public key. It's then a client detail how to make this into a good user interface.
+
 ### Bramble Synchronization Protocol (BSP)
 
 BSP is used in Briar, which is a messaging app for mobile devices. It is based on a friend-to-friend network, so it leverages trusted connections. It uses a secure transport protocol to transfer data from one device to another securely. While BSP is made for mobile devices, it assumes devices are largely online. This has battery concerns, and also means some difficulty in the real-world for running on iPhone devices.
