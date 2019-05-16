@@ -201,7 +201,67 @@ Also note that this would work without a specific structured overlay on top of I
 
 ## Specification and wire protocol
 
+What follows is the actual specification and wire protocol. Note that this is the Minimal Version of Data Sync (MVDS). Both of these are in draft mode and currently being tested. They don't currently implement any of the enhancements listed above.
 
+## Specification
+
+*We expect implementations of MVDS to be generic, allowing for the underlying transport to be easily replaced*
+
+## Types
+
+### Custom Types
+
+| Type        | Equivilant | Description                                               |
+|-------------|------------|-----------------------------------------------------------|
+| `MessageID` | `bytes32`  | 32 bytes of binary data obtained when hashing the message |
+
+### Message Types
+
+We define `messages` as packets sent and recieved by MVDS nodes. They have been taken from the BSP spec.
+
+#### `ACK`
+
+@TODO: DESCRIBE
+
+```python
+{
+    'ids': ['MessageID']
+}
+```
+
+#### `OFFER`
+
+@TODO: DESCRIBE
+
+```python
+{
+    'id': ['MessageID']
+}
+```
+
+#### `REQUEST`
+
+@TODO: DESCRIBE
+
+```python
+{
+    'id': ['MessageID']
+}
+```
+
+#### `MESSAGE`
+
+@TODO: DESCRIBE
+
+```python
+{
+    'group_id': 'bytes32',
+    'timestamp': 'int64',
+    'body': 'bytes'
+}
+```
+
+### Wire protocol
 
 ### Example Clients
 
