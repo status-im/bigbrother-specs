@@ -203,23 +203,19 @@ Also note that this would work without a specific structured overlay on top of I
 
 What follows is the actual specification and wire protocol. Note that this is the Minimal Version of Data Sync (MVDS). Both of these are in draft mode and currently being tested. They don't currently implement any of the enhancements listed above.
 
-## Specification
+### Types
 
-*We expect implementations of MVDS to be generic, allowing for the underlying transport to be easily replaced*
-
-## Types
-
-### Custom Types
+#### Custom Types
 
 | Type        | Equivilant | Description                                               |
 |-------------|------------|-----------------------------------------------------------|
 | `MessageID` | `bytes32`  | 32 bytes of binary data obtained when hashing the message |
 
-### Message Types
+#### Message Types
 
 We define `messages` as packets sent and recieved by MVDS nodes. They have been taken from the BSP spec.
 
-#### `ACK`
+##### `ACK`
 
 @TODO: DESCRIBE
 
@@ -229,7 +225,7 @@ We define `messages` as packets sent and recieved by MVDS nodes. They have been 
 }
 ```
 
-#### `OFFER`
+##### `OFFER`
 
 @TODO: DESCRIBE
 
@@ -239,7 +235,7 @@ We define `messages` as packets sent and recieved by MVDS nodes. They have been 
 }
 ```
 
-#### `REQUEST`
+##### `REQUEST`
 
 @TODO: DESCRIBE
 
@@ -249,7 +245,7 @@ We define `messages` as packets sent and recieved by MVDS nodes. They have been 
 }
 ```
 
-#### `MESSAGE`
+##### `MESSAGE`
 
 @TODO: DESCRIBE
 
@@ -258,6 +254,39 @@ We define `messages` as packets sent and recieved by MVDS nodes. They have been 
     'group_id': 'bytes32',
     'timestamp': 'int64',
     'body': 'bytes'
+}
+```
+
+### Protobuf
+
+```
+syntax = "proto3";
+
+package mvds;
+
+message Payload {
+  Ack ack = 1;
+  Offer offer = 2;
+  Request request = 3;
+  repeated Message messages = 4;
+}
+
+message Ack {
+  repeated bytes id = 1;
+}
+
+message Message {
+  bytes group_id = 1;
+  int64 timestamp = 2;
+  bytes body = 3;
+}
+
+message Offer {
+  repeated bytes id = 1;
+}
+
+message Request {
+  repeated bytes id = 1;
 }
 ```
 
