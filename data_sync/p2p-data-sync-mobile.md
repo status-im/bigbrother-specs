@@ -165,7 +165,19 @@ One downside of this is that it requires Internet access and a specific overlay 
 
 The way it'd work is as follows. A node commits a message to their local log, then they sync it to some decentralized file storage, such as Swarm or IPFS. This information is further confirmation that the data has been replicated and acts as a form of ACK where Swarm is seen as a node. Recipients then know, through previous communication with sender node, that they can look at this log. This means the two nodes don't need to be both online, and they can leverage Swarm, or other similar solutions, with less latency. Another way of looking at it is as chunks providing a linked list. Even if a similar solution lacks a feeds-like mechanism (e.g. like ENS or DNS), it can still be used for chunk storage, even though latency might be slightly higher.
 
-# Feeds vs Swarm content addressed vs updates  ...
+Let's decompose the above into orthogonal concerns.
+
+#### Content addressed storage (CAS)
+
+Swarm with its chunks and references is a content addressed storage. This allows us to get and put data there, with various properties. There are also other content addressed storages, such as IPFS and local node's cache. What's important is that there's a way to refer to messages, and that this is based on a cryptographic hash function. This means we have two properties: collision resistance and preimage resistance. This allows us to uniquely refer to a piece of content, and it can be leveraged by clients in term of ordering of events. It also allows us to check the data integrity of a specific message.
+
+A desirable property here is to be as agnostic as possible to the specific infrastructure used. How can we refer to the same piece of content through various stores? This is an open question, but tentatively multihashes and multicodec can be used for this.
+
+#### Update pointers
+
+In the above section, we suggest using Feeds. However, this is just one alternative. Other alternatives are ENS, DNS, etc. We can also use endpoint communicating the latest update through a push-message. It's desirable that this notion is kept abstract.
+
+What it does is to (a) allow you to see last updated data and ideally (b) reference previous state, so you can fetch it via CAS, or at least be aware that it's missing.
 
 ### Enhancement 3: Dispersy Bloom Filters
 
@@ -175,10 +187,12 @@ By using bloom filters and repeat random interactions with other nodes in a data
 
 We can extend the message types as follows. In large group contexts, OFFER and ACK, all messages that have a set of message ids, can be replaced with BLOOM_AVAILABLE and some additional subset description. This conveys the same information as OFFER and ACK but probabilistically, in the following way. If we have a data sync context with 100 nodes, one node A has some messages locally available, and it connects to a random node B. A then sends a bloom filter along with some additional information. B then compares each locally available message (for some range) with the bloom filter sent. It gets a response 'maybe' or 'not' in set, and false positives here are fine. If it is not in set, it knows A is missing these messages, and in return it sends a specific REQUEST for these messages, along with its own Bloom filter. B then does vice versa. Messages that are in the 'maybe' category can be seen as probabilistic ACK, and no further action is needed from the receiving node. This information can be discarded, or it can be used as probabilistic information to inform things like future send time.
 
+#### Subset description
 How is the subset described? What's most important is that there's a way to divide up a set of messages into some equally sized buckets. This is important to ensure the bloom filter length and false positive rate stays the same. A good way of doing this is using Lamport timestamps. These are non-unique but monotonic, and they roughly evenly divide up the space of messages. I.e. we can select a range 0..1000 and communicate this in the BLOOM_AVAILABLE message, and the recipent knows which subset of messages to look for. What happens if there's a byzantine node that sends messages with the same timestamp? In that case, the sending node would select a smaller subset partition range. The universe size for the bloom filter is determined by sender, and it simply hints at the receiver where it should look in its own store.
 
 We don't just want to arbitrarily divide the space, instead we want to make sure we send a request that's most likely to get the information we need. Similar to DSP, depending on if the node has almost caught up or is just starting, different heuristics can be used. For example, if a node just joined, it can use a modulo heuristic. This way a field in BLOOM_AVAILABLE would also be modulo and offset. As an example, if you expect there to be roughly 1000 messages, you might select modulo 10. This would then divide this up the space into 10 pieces, which can be requested in parallel. I.e. 1st, 11th, 21th message, and so on. This approximates a linear download, without requiring any state. For more recent messages, a pivot heuristic that biases recent messages is desirable, that probabilistically picks messages that are more recent. For further analysis of this, we refer to the DSP paper.
 
+#### Sync scope and location of subset description
 A brief experimental note on sync scope and Lamport clocks. In some cases we might want untrusted nodes so not use information inside payload. One thing worth noticing here is where we want the global time partial ordering Lamport clocks to be stored. By default, they will be inside a data sync context payload. There may be circumstances were it is desirable to expand this. As a concrete example: imagine you have several one on one chats, each their own data sync context, since the chats are encrypted. If these devices are mostly offline, and you don't leverage remote replicated logs, it may be desirable to let other nodes help you sync these messages for you. This is similar to having an encrypted torrent file, but still having a way to refer to roughly ordered chunks, so other nodes can seed it. It may be that it's desirable to have nested sync contexts, where participants can choose to let other nodes help them sync in order to reduce latency. By doing so, another level of Lamport clocks can be added in the header, and the sync scope ID can also be used to divie up the space. This design is experimental, and belongs in future work.
 
 Notice that this general approach might still have to be complemented with REQUESTs. If we want casual consistency, it's desirable to have a way to refer to specific message ids to fetch these messages.
