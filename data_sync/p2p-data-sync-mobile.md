@@ -203,6 +203,18 @@ Also note that this would work without a specific structured overlay on top of I
 
 What follows is the actual specification and wire protocol. Note that this is the Minimal Version of Data Sync (MVDS). Both of these are in draft mode and currently being tested. They don't currently implement any of the enhancements listed above.
 
+### Caveats for the minimal version (Status specific)
+
+This section is specific to Status engineering concerns to outline some aspects regarding the current state of MVDS (mid-May 2019).
+
+1. On mode of replication: This version uses passive replication where nodes share data they are already interested in. In future version, this may be extended to use active replication, see enhanement 2 and 3.
+
+2. On the role of mailservers: This does not replace mailservers outright, it amends them and makes them less critical. A simple litmus test is that reliability is not impacted by mailserver outage. Specificially, it deals with correctness first, not latency and mostly-offline per se. It is compatible with mostly-offlice enhanchements (see requirement 3), and this will be a focus of future iterations, for example through the enhancements mentioned.
+
+3. On parent IDs: This is a concern for the specific clients that uses data sync layer. Other approaches may also be used and are not actively discouraged. It is a desirable aspect though, as it allows us to leverage CAS and build up a DAG, as outlined above. As future iterations are further along and example clients are implemented, this will likely be more clear.
+
+4. Current implementation: Currently there's a reference implementation being integrated `status-console-client` (Golang). The (developing) spec is the source of truth though. In the future, it is expected that more clients will be integrated, for example in Javascript, Nim and others. For integration into the app, this is up to Core to leverage the code in `status-console-client`.
+
 ### Types
 
 #### Custom Types
@@ -301,3 +313,8 @@ message Request {
 ## Conclusion
 
 ## References
+
+
+
+- [Bramble Synchronization Protocol](https://code.briarproject.org/briar/briar-spec/blob/master/protocols/BSP.md)
+- [Minimal Viable Data Sync](https://github.com/status-im/mvds/)
