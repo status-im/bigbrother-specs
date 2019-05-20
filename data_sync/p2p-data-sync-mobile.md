@@ -189,6 +189,8 @@ Swarm with its chunks and references is a content addressed storage. This allows
 
 A desirable property here is to be as agnostic as possible to the specific infrastructure used. How can we refer to the same piece of content through various stores? This is an open question, but tentatively multihashes and multicodec can be used for this.
 
+One way of solving this issue is by wrapping. That is, a client might advertise they have the capability to replicate messages on Swarm. Reciving nodes then know to look at a certain feed, and referenced there we have chunk IDs. Inside the chunks we have the actual messages. So we have both ChunkIDs (Swarm references), and inside the chunks themselves the actual messages with their message IDs. This ensures messages stay immutable and are not tightly coupled to a specific storage or distribution mechanism.
+
 #### Update pointers
 
 In the above section, we suggest using Feeds. However, this is just one alternative. Other alternatives are ENS, DNS, etc. We can also use endpoint communicating the latest update through a push-message. It's desirable that this notion is kept abstract.
