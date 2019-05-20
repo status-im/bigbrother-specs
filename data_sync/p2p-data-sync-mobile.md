@@ -376,6 +376,51 @@ As you can see, a lot of different types of clients are possible. What they have
 
 ## Proof-Evaluation-Simulation
 
+Various types of simulation are needed to verify the design. Specifically wrt parameters such as bandwidth and latency. Here we draft some example simulations.
+
+### Simulation 1: 1-1 chat (basic)
+
+Two nodes talking to each with 10% churn each. That is: 10% probability to be online at any given time. When online, a node is online for X time. For simplicity, let's assume X is 5 minutes. This can be a parameter and be varied up to connection windows as short as 30s.
+
+Send 5 messages each.
+
+Answer the following questions:
+1. What's the bandwidth overhead?
+Expressed as multipler of 10 messages. E.g. if you try to send message one message 3 times and get 1 ack, that's x4 multipler.
+
+2. What's the latency?
+Expressed as ticks or absolute time until a node has received all messages sent by other node. Alternatively: expressed as a distribution of average or median latency, along with P90 latency. I.e. what's the latency for the 90%th delayed message?
+
+#### Simulation 2: 1-1 chat (basic, naive extension)
+
+Answer same questions above, but where a mailserver with 90% reliability relays messages.
+
+### Simulation 3: Large public chat (basic)
+
+100 people sending 5 messages each.
+
+Answer same questions as above.
+
+### Simulation 4: Large public chat (basic, multicast)
+
+Same as above, but leverage multicast extension.
+
+### Simulation 5: Large public chat (basic, multicast, naive extension)
+
+Multicast+naive mailserver.
+
+### Simulation 6: Large public chat (basic, dispersy extension)
+
+Dispery random pairwise bloom filter.
+
+### Simulation 7: Large public chat (basic, dispersy extension, naive extension)
+
+Dispery random pairwise bloom filter, and mailserver.
+
+### Notes
+
+Can probably be compacted differently, and might make sense to vary or measure other variables.
+
 ## Future work
 
 ## Conclusion
