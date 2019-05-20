@@ -338,6 +338,42 @@ message Request {
 
 ### Example Clients
 
+There are many clients that might use data sync, and each client might have their own policy for sharing messages, etc. This is where the semantics of what is actually in a message lives, which might differ in terms of guarantees and so on depending the domain.
+
+#### Private chat
+
+A simple example is a private chat, which includes two humans talking encrypted. Additionally, each human might have multiple devices. Even though it might just be two individuals, we still have a group context.
+
+#### Private group chat
+
+This is similar to private chat, except you might have some semantics around who can join a chat. This can be specified in the form of a finite state machine, and message types such as INVITE can be protobuf messages.
+
+#### Public (group) chat
+
+This is a channel with a lot of participants, and it might not be end to end encrypted. Additionally, it might be coordination-less, such that you can take a given string and hash it to a 'topic', and then join the chat.
+
+Membership here might be more probabilistic, and sharing policy more restricted/random, due to bandwidth constraints.
+
+#### State channels
+
+To enable layer 2 scaling solutions, such as state channels. This might have more stringent requirements than normal 'human' chat.
+
+#### Transport properties
+
+To communicate what transports a specific node supports. This can be leveraged by other clients in terms of where to look for updates, etc.
+
+#### Tribute to talk
+
+Setting a specific limit for a stake that has to be paid before messages are delivered to an end user.
+
+#### Multisig coordination
+
+Ensuring nodes get updates on when a multisig signature is required. A private group chat with native support for multsig interactions.
+
+#### And so on
+
+As you can see, a lot of different types of clients are possible. What they have in common is that they leverage data sync to various extents, and don't have to think about reliability. Instead, they can specify semantics they care about. By specifying these in e.g. protobufs and having clear message types, roles, finite state machine and sharing policy, we enable implementation of these clients into multiple end user applications
+
 ## Proof-Evaluation-Simulation
 
 ## Future work
