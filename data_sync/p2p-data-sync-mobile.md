@@ -131,6 +131,22 @@ For 7, this is often a desirable feature for secure messaging applications. The 
 
 ## Solution / System Model
 
+# System model
+
+## System components
+
+Here's a brief overview of the components that together make up data sync.
+
+1. A *node*, or device, synchronizes data with other nodes.
+2. *Data*, or a message, is the minimal unit being synchronized, and it is references by a globally unique *message ID*.
+3. A *group* is an independent sync scope consisting of multiple nodes synchronizing some messages.
+4. A *log* is an ordered list of messages by a particular node in a sync scope.
+5. A *feed* is a persistent identifier to the head of a log, which allows us to identify missing data.
+
+Nodes belonging to the same group can choose which other nodes they synchronize with. A log is local by default, but can be replicated as part of communication with other nodes (passive replication) and, as an extension, actively replicated through decentralized file storage. A feed can either be implicit, in that it is the last message received by another node, or it can be explicit, in the case of fetching updates from mostly-offline nodes. Assuming messages include message IDs from other nodes, by taking logs from multiple nodes in a group together, we can optionally form an immutable graph.
+
+## Overview
+
 We propose a protocol that's heavily inspired by BSP, with some tweaks, some minor and some major. Let's first introduce BSP in more detail as specified before diving into enhancements.
 
 We synchronize messages between devices. Each device has a set of peers, of which it chooses a subset to which it wants to synchronize messages with. Each synchronization happens within a data group, and in a data group there's a set of immutable messages. Each message has a message id that identifies it.
