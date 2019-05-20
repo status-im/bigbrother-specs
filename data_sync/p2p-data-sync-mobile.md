@@ -231,6 +231,20 @@ This section is specific to Status engineering concerns to outline some aspects 
 
 4. Current implementation: Currently there's a reference implementation being integrated `status-console-client` (Golang). The (developing) spec is the source of truth though. In the future, it is expected that more clients will be integrated, for example in Javascript, Nim and others. For integration into the app, this is up to Core to leverage the code in `status-console-client`.
 
+#### Mailservers and data sync upgrade path
+
+In a sentence, data sync provides reliability/correctness whereas mailserver is currently used to provide less latency/more availability.
+
+What's the contract for mailservers?
+A node requests messages from a set of topics (roughly group context). This can be added with a time interval hint. Asynchronously, this mailserver will send expired messages. This is a set of messages, some of which the node can read and some they can't. There may be messages missing from this. Without data sync, we currently assume and require mailservers to have high availability to pick up all the envelopes.
+
+The upgrade path looks like this:
+1. Ad hoc messaging + mailservers (need to be HA)
+2. Data sync + mailservers (doesn't need to be HA)
+3. Data sync + Swarm (e.g.)
+
+That is, we can leave mailserver as they are. For dealing with missing data, data sync will ensure not ACKed messages are resent. Alternatively and additionally, the Dispersy enhancement and/or message dependencies can be used to ensure receiver has received relevant messages. During a Chaos Unicorn day event, lack of mailservers would merely lead to message delays, not lost messages.
+
 ### Types
 
 #### Custom Types
