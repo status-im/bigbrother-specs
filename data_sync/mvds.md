@@ -17,9 +17,9 @@
 
 ## Abstract
 
-In this paper we describe and specify a minimum viable protocol for data synchronization built on top of the Bramble Synchronization Protocol<sup>1</sup>. This protocol is built on top of the Bramble Synchronization Protocol and was designed in order to ensure reliable messaging between peers communicating across an unreliable peer-to-peer (P2P) network where they may be unreachable or unresponsive. 
+In this specification we describe a minimum viable protocol for data synchronization inspired by the Bramble Synchronization Protocol<sup>1</sup>. This protocol is built on top of the Bramble Synchronization Protocol and was designed in order to ensure reliable messaging between peers communicating across an unreliable peer-to-peer (P2P) network where they may be unreachable or unresponsive. 
 
-We present a functional specification for future implementation<sup>2</sup> as well as reference simulation data which demonstrates its performance against the Bramble Synchronization Protocol.
+We present a functional specification for future implementation<sup>2</sup> as well as reference simulation data which demonstrates its performance.
 
 ## Wire Protocol
 
@@ -56,13 +56,13 @@ message Request {
 
 ### State
 
-A state is kept for any message of the types `OFFER`, `REQUEST` and `MESSAGE` we do not keep states for `ACK` messages as we do not retransmit those periodically. The following information is stored for messages:
+State is kept for any message of the types `OFFER`, `REQUEST` and `MESSAGE` we do not keep states for `ACK` messages as we do not retransmit those periodically. The following information is stored for messages:
 
  - **Type** - Either `OFFER`, `REQUEST` or `MESSAGE`
  - **Send Count** - The amount of times a message has been sent to a peer.
  - **Send Epoch** - The next epoch at which a message can be sent to a peer.
 
-### Flow<!-- is this a good enough title? -->
+### Flow
 
 A maximum of one payload is sent to peers per epoch, this payload contains all `ACK`, `OFFER`, `REQUEST` and `MESSAGE` messages for the specific peer. Payloads are created in reaction to messages recieved by peers or new messages being sent by a node. 
 
