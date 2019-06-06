@@ -68,7 +68,7 @@ A maximum of one payload is sent to peers per epoch, this payload contains all `
 
 The following rules dictate how payloads are constructed every epoch:
 
- - When a node sends a message to a peer, initially an `OFFER` is created, this `OFFER` is added to the next payload and the state.
+ - A node initially offers a message, this means an `OFFER` is added to the next payload and the state.
  - When a node recieves an `OFFER`, a `REQUEST` is added to the next payload and the state. 
  - When a node recieves a `REQUEST` for a previously sent `OFFER`, the `OFFER` is removed from the state and the corresponding `MESSAGE` is added to the next payload and the state.
  - When a node receives a `MESSAGE`, the `REQUEST` is removed from the state and an `ACK` is added to the next payload.
