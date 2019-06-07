@@ -7,19 +7,26 @@
 ## Table of Contents
 
 1. [Abstract](#abstract)
-2. [Wire Protocol](#wire-protocol)
+2. [Definitions](#definitions)
+3. [Wire Protocol](#wire-protocol)
     1. [Payloads](#payloads)
-3. [Synchronization](#synchronization)
+4. [Synchronization](#synchronization)
     1. [State](#state)
     2. [Flow](#flow)
     3. [Retransmission](#retransmission)
-4. [Footnotes](#footnotes)
+5. [Footnotes](#footnotes)
 
 ## Abstract
 
 In this specification we describe a minimum viable protocol for data synchronization inspired by the Bramble Synchronization Protocol<sup>1</sup>. This protocol is built on top of the Bramble Synchronization Protocol and was designed in order to ensure reliable messaging between peers communicating across an unreliable peer-to-peer (P2P) network where they may be unreachable or unresponsive. 
 
 We present a functional specification for future implementation<sup>2</sup> as well as reference simulation data which demonstrates its performance.
+
+## Definitions
+
+| Term | Description |
+|------|-------------|
+| **Peer** | The other nodes that a peer is connected to. |
 
 ## Wire Protocol
 
