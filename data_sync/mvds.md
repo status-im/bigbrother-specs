@@ -63,7 +63,7 @@ message Request {
 
 ### State
 
-State is kept for any message of the types `OFFER`, `REQUEST` and `MESSAGE` we do not keep states for `ACK` messages as we do not retransmit those periodically. The following information is stored for messages:
+State is kept for any message of the types `OFFER`, `REQUEST` and `MESSAGE` we do not keep states for `ACK` messages as we do not retransmit those periodically. State is stored per peer. The following information is stored for messages:
 
  - **Type** - Either `OFFER`, `REQUEST` or `MESSAGE`
  - **Send Count** - The amount of times a message has been sent to a peer.
@@ -73,13 +73,13 @@ State is kept for any message of the types `OFFER`, `REQUEST` and `MESSAGE` we d
 
 A maximum of one payload is sent to peers per epoch, this payload contains all `ACK`, `OFFER`, `REQUEST` and `MESSAGE` messages for the specific peer. Payloads are created in reaction to messages recieved by peers or new messages being sent by a node. 
 
-The following rules dictate how payloads are constructed every epoch:
+The following rules dictate how payloads are constructed every epoch for any given peer:
 
- - A node initially offers a message, this means an `OFFER` is added to the next payload and the state.
- - When a node recieves an `OFFER`, a `REQUEST` is added to the next payload and the state. 
- - When a node recieves a `REQUEST` for a previously sent `OFFER`, the `OFFER` is removed from the state and the corresponding `MESSAGE` is added to the next payload and the state.
- - When a node receives a `MESSAGE`, the `REQUEST` is removed from the state and an `ACK` is added to the next payload.
- - When a node receives an `ACK`, the `MESSAGE` is removed from the state.
+ - A node initially offers a message, this means an `OFFER` is added to the next payload and the state for the given peer.
+ - When a node recieves an `OFFER`, a `REQUEST` is added to the next payload and the state for the given peer. 
+ - When a node recieves a `REQUEST` for a previously sent `OFFER`, the `OFFER` is removed from the state and the corresponding `MESSAGE` is added to the next payload and the state for the given peer.
+ - When a node receives a `MESSAGE`, the `REQUEST` is removed from the state and an `ACK` is added to the next payload for the given peer.
+ - When a node receives an `ACK`, the `MESSAGE` is removed from the state for the given peer.
  - All messages that require retransmission are added to the payload, given `Send Epoch` has been reached.
 
 <!-- Batch Mode? -->
