@@ -73,7 +73,9 @@ State is kept for any message of the types `OFFER`, `REQUEST` and `MESSAGE` we d
 
 A maximum of one payload is sent to peers per epoch, this payload contains all `ACK`, `OFFER`, `REQUEST` and `MESSAGE` messages for the specific peer. Payloads are created in reaction to messages recieved by peers or new messages being sent by a node. 
 
-The following rules dictate how payloads are constructed every epoch for any given peer:
+Nodes have two modes with which they can send messages, `BATCH` and `INTERACTIVE` mode. The following rules dictate how nodes construct payloads every epoch for any given peer for both modes.
+
+#### Interactive Mode
 
  - A node initially offers a message, this means an `OFFER` is added to the next payload and the state for the given peer.
  - When a node recieves an `OFFER`, a `REQUEST` is added to the next payload and the state for the given peer. 
@@ -82,13 +84,20 @@ The following rules dictate how payloads are constructed every epoch for any giv
  - When a node receives an `ACK`, the `MESSAGE` is removed from the state for the given peer.
  - All messages that require retransmission are added to the payload, given `Send Epoch` has been reached.
 
-<!-- Batch Mode? -->
-
 <p align="center">
     <img src="https://notes.status.im/uploads/upload_4256a743dc961a67446940dd1bd36107.png" />
     <br />
-    Figure 1: Message delivery without retransmissions.
+    Figure 1: Message delivery without retransmissions in interactive mode.
 </p>
+
+#### Batch Mode
+
+ - When a node sends a `MESSAGE`, it is added to the next payload and the state for the given peer.
+ - When a node receives a `MESSAGE`, an `ACK` is added to the next payload for the corresponding peer.
+ - When a node receives an `ACK`, the `MESSAGE` is removed from the state for the given peer.
+ - All messages that require retransmission are added to the payload, given `Send Epoch` has been reached.
+
+<!-- diagram -->
 
 <!-- Interactions with state, flow chart with retransmissions? -->
 
