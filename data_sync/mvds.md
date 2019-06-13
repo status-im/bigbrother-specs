@@ -37,6 +37,8 @@ This specification does not define anything related to the transport of packets,
 
 ### Payloads
 
+Payloads are implemented using [protocol buffers](https://developers.google.com/protocol-buffers/).
+
 ```protobuf
 message Payload {
   Ack ack = 1;
