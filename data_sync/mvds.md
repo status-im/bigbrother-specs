@@ -27,7 +27,7 @@ We present a functional specification for future implementation<sup>2</sup> as w
 
 | Term | Description |
 |------|-------------|
-| **Peer** | The other nodes that a peer is connected to. |
+| **Peer** | The other nodes that a node is connected to. |
 
 ## Wire Protocol
 
