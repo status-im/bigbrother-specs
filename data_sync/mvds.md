@@ -9,7 +9,8 @@
 1. [Abstract](#abstract)
 2. [Definitions](#definitions)
 3. [Wire Protocol](#wire-protocol)
-    1. [Payloads](#payloads)
+    1. [Transport](#transport) 
+    2. [Payloads](#payloads)
 4. [Synchronization](#synchronization)
     1. [State](#state)
     2. [Flow](#flow)
@@ -29,6 +30,10 @@ We present a functional specification for future implementation<sup>2</sup> as w
 | **Peer** | The other nodes that a peer is connected to. |
 
 ## Wire Protocol
+
+### Transport
+
+This specification does not define anything related to the transport of packets, it is assumed that this is abstracted in such a way that any transport protocol could be easily implemented.
 
 ### Payloads
 
