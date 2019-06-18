@@ -99,12 +99,19 @@ Nodes have two modes with which they can send messages, `BATCH` and `INTERACTIVE
 
 #### Batch Mode
 
- - When a node sends a `MESSAGE`, it is added to the next payload and the state for the given peer.
- - When a node receives a `MESSAGE`, an `ACK` is added to the next payload for the corresponding peer.
- - When a node receives an `ACK`, the `MESSAGE` is removed from the state for the given peer.
- - All messages that require retransmission are added to the payload, given `Send Epoch` has been reached.
+ 1. When a node sends a `MESSAGE`, it is added to the next payload and the state for the given peer.
+ 2. When a node receives a `MESSAGE`, an `ACK` is added to the next payload for the corresponding peer.
+ 3. When a node receives an `ACK`, the `MESSAGE` is removed from the state for the given peer.
+ 4. All messages that require retransmission are added to the payload, given `Send Epoch` has been reached.
 
 <!-- diagram -->
+
+<p align="center">
+    <img src="./data_sync/ds_seqdiagram_batch1.png" />
+    <br />
+    Figure 1: Message delivery without retransmissions in batch mode.
+</p>
+
 
 <!-- Interactions with state, flow chart with retransmissions? -->
 
