@@ -31,9 +31,9 @@ We present a functional specification for future implementation<sup>2</sup> as w
 
 ## Wire Protocol
 
-### Transport
+### Secure Transport
 
-This specification does not define anything related to the transport of packets, it is assumed that this is abstracted in such a way that any transport protocol could be easily implemented.
+This specification does not define anything related to the transport of packets. It is assumed that this is abstracted in such a way that any secure transport protocol could be easily implemented. Likewise, properties such as confidentiality, integrity, authenticity and forward secrecy are assumped to be provided by a layer below.
 
 ### Payloads
 
