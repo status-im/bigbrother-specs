@@ -107,7 +107,7 @@ Nodes have two modes with which they can send messages, `BATCH` and `INTERACTIVE
 <!-- diagram -->
 
 <p align="center">
-    <img src="./data_sync/ds_seqdiagram_batch1.png" />
+    <img src="./ds_seqdiagram_batch1.png" />
     <br />
     Figure 1: Message delivery without retransmissions in batch mode.
 </p>
