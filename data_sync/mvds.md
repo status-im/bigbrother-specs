@@ -9,7 +9,7 @@
 1. [Abstract](#abstract)
 2. [Definitions](#definitions)
 3. [Wire Protocol](#wire-protocol)
-    1. [Transport](#transport) 
+    1. [Secure Transport](#secure-transport) 
     2. [Payloads](#payloads)
 4. [Synchronization](#synchronization)
     1. [State](#state)
@@ -121,7 +121,7 @@ The message of the type `Type` is retransmitted every time `Send Epoch` is small
 
 `Send Epoch` and `Send Count` are increased every time a message is retransmitted. Although no function is defined on how to increase `Send Epoch`, it should be exponentially increased until reaching an upper bound where it then goes back to a lower epoch in order to prevent message `Send Epoch`'s from becoming too large.
 
-***NOTE:** We do not retransmission `ACK`s as we do not know when they have arrived, therefore we simply resend them every time we receive a `MESSAGE`*
+> ***NOTE:** We do not retransmission `ACK`s as we do not know when they have arrived, therefore we simply resend them every time we receive a `MESSAGE`*
 
 ## Footnotes
 
