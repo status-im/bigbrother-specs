@@ -121,6 +121,8 @@ The message of the type `Type` is retransmitted every time `Send Epoch` is small
 
 `Send Epoch` and `Send Count` are increased every time a message is retransmitted. Although no function is defined on how to increase `Send Epoch`, it should be exponentially increased until reaching an upper bound where it then goes back to a lower epoch in order to prevent message `Send Epoch`'s from becoming too large.
 
+***NOTE:** We do not retransmission `ACK`s as we do not know when they have arrived, therefore we simply resend them every time we receive a `MESSAGE`*
+
 ## Footnotes
 
 1. https://code.briarproject.org/briar/briar-spec/blob/master/protocols/BSP.md
