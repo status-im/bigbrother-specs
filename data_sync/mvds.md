@@ -93,7 +93,7 @@ Nodes have two modes with which they can send records, `BATCH` and `INTERACTIVE`
  - All records that require retransmission are added to the payload, given `Send Epoch` has been reached.
 
 <p align="center">
-    <img src="https://notes.status.im/uploads/upload_4256a743dc961a67446940dd1bd36107.png" />
+    <img src="./interactive.png" />
     <br />
     Figure 1: Delivery without retransmissions in interactive mode.
 </p>
