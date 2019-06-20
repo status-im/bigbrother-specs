@@ -40,16 +40,14 @@ This specification does not define anything related to the transport of packets.
 
 Payloads are implemented using [protocol buffers](https://developers.google.com/protocol-buffers/).
 
+Payloads are implemented using [protocol buffers](https://developers.google.com/protocol-buffers/).
+
 ```protobuf
 message Payload {
-  Ack ack = 1;
-  Offer offer = 2;
-  Request request = 3;
+  repeated bytes acks = 1;
+  repeated bytes offers = 2;
+  repeated bytes requests = 3;
   repeated Message messages = 4;
-}
-
-message Ack {
-  repeated bytes ids = 1; // A list of Message IDs a node is acknowledging
 }
 
 message Message {
@@ -58,14 +56,14 @@ message Message {
   bytes body = 3;
 }
 
-message Offer {
-  repeated bytes ids = 1; // A list of Message IDs a node is offering
-}
-
-message Request {
-  repeated bytes ids = 1; // A list of Message IDs a node is requesting
-}
 ```
+
+Each payload contains the following fields:
+
+- **Acks:** This field contains a list (can be empty) of `MessageID`s informing the recepient that sender holds a specific message.
+- **Offers:** This field contains a list (can be empty) of `MessageID`s which the sender would like to give to the recepient.
+- **Requests:** This field contains a list (can be empty) of `MessageID`s which the sender would like to receive from the recepient.
+- **Messages:** This fied contains a list of messages (can be empty).
 
 ## Synchronization
 
