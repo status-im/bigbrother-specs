@@ -49,7 +49,7 @@ message Payload {
 }
 
 message Ack {
-  repeated bytes ids = 1;
+  repeated bytes ids = 1; // A list of Message IDs a node is acknowledging
 }
 
 message Message {
@@ -59,11 +59,11 @@ message Message {
 }
 
 message Offer {
-  repeated bytes ids = 1;
+  repeated bytes ids = 1; // A list of Message IDs a node is offering
 }
 
 message Request {
-  repeated bytes ids = 1;
+  repeated bytes ids = 1; // A list of Message IDs a node is requesting
 }
 ```
 
