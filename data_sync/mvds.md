@@ -28,6 +28,7 @@ We present a functional specification for future implementation<sup>2</sup> as w
 | Term | Description |
 |------|-------------|
 | **Peer** | The other nodes that a node is connected to. |
+| **Record** | Defines a payload element of either the type `OFFER`, `REQUEST`, `MESSAGE` or `ACK` |
 
 ## Wire Protocol
 
@@ -70,31 +71,31 @@ message Request {
 
 ### State
 
-State is kept for any message of the types `OFFER`, `REQUEST` and `MESSAGE` we do not keep states for `ACK` messages as we do not retransmit those periodically. State is stored per peer. The following information is stored for messages:
+State is kept for any record of the types `OFFER`, `REQUEST` and `MESSAGE` we do not keep states for `ACK` records as we do not retransmit those periodically. State is stored per peer. The following information is stored for records:
 
  - **Type** - Either `OFFER`, `REQUEST` or `MESSAGE`
- - **Send Count** - The amount of times a message has been sent to a peer.
- - **Send Epoch** - The next epoch at which a message can be sent to a peer.
+ - **Send Count** - The amount of times a record has been sent to a peer.
+ - **Send Epoch** - The next epoch at which a record can be sent to a peer.
 
 ### Flow
 
-A maximum of one payload is sent to peers per epoch, this payload contains all `ACK`, `OFFER`, `REQUEST` and `MESSAGE` messages for the specific peer. Payloads are created every epoch containing reactions to previously received messages by peers or new messages being sent out by nodes. 
+A maximum of one payload is sent to peers per epoch, this payload contains all `ACK`, `OFFER`, `REQUEST` and `MESSAGE` records for the specific peer. Payloads are created every epoch containing reactions to previously received records by peers or new records being sent out by nodes. 
 
-Nodes have two modes with which they can send messages, `BATCH` and `INTERACTIVE` mode. The following rules dictate how nodes construct payloads every epoch for any given peer for both modes.
+Nodes have two modes with which they can send records, `BATCH` and `INTERACTIVE` mode. The following rules dictate how nodes construct payloads every epoch for any given peer for both modes.
 
 #### Interactive Mode
 
- - A node initially offers a message, this means an `OFFER` is added to the next payload and the state for the given peer.
+ - A node initially offers a `MESSAGE`, this means an `OFFER` is added to the next payload and the state for the given peer.
  - When a node recieves an `OFFER`, a `REQUEST` is added to the next payload and the state for the given peer. 
  - When a node recieves a `REQUEST` for a previously sent `OFFER`, the `OFFER` is removed from the state and the corresponding `MESSAGE` is added to the next payload and the state for the given peer.
  - When a node receives a `MESSAGE`, the `REQUEST` is removed from the state and an `ACK` is added to the next payload for the given peer.
  - When a node receives an `ACK`, the `MESSAGE` is removed from the state for the given peer.
- - All messages that require retransmission are added to the payload, given `Send Epoch` has been reached.
+ - All records that require retransmission are added to the payload, given `Send Epoch` has been reached.
 
 <p align="center">
     <img src="https://notes.status.im/uploads/upload_4256a743dc961a67446940dd1bd36107.png" />
     <br />
-    Figure 1: Message delivery without retransmissions in interactive mode.
+    Figure 1: Delivery without retransmissions in interactive mode.
 </p>
 
 #### Batch Mode
@@ -102,14 +103,14 @@ Nodes have two modes with which they can send messages, `BATCH` and `INTERACTIVE
  1. When a node sends a `MESSAGE`, it is added to the next payload and the state for the given peer.
  2. When a node receives a `MESSAGE`, an `ACK` is added to the next payload for the corresponding peer.
  3. When a node receives an `ACK`, the `MESSAGE` is removed from the state for the given peer.
- 4. All messages that require retransmission are added to the payload, given `Send Epoch` has been reached.
+ 4. All records that require retransmission are added to the payload, given `Send Epoch` has been reached.
 
 <!-- diagram -->
 
 <p align="center">
     <img src="./ds_seqdiagram_batch1.png" />
     <br />
-    Figure 1: Message delivery without retransmissions in batch mode.
+    Figure 1: Delivery without retransmissions in batch mode.
 </p>
 
 
@@ -117,9 +118,9 @@ Nodes have two modes with which they can send messages, `BATCH` and `INTERACTIVE
 
 ### Retransmission
 
-The message of the type `Type` is retransmitted every time `Send Epoch` is smaller than or equal to the current epoch.
+The record of the type `Type` is retransmitted every time `Send Epoch` is smaller than or equal to the current epoch.
 
-`Send Epoch` and `Send Count` are increased every time a message is retransmitted. Although no function is defined on how to increase `Send Epoch`, it should be exponentially increased until reaching an upper bound where it then goes back to a lower epoch in order to prevent message `Send Epoch`'s from becoming too large.
+`Send Epoch` and `Send Count` are increased every time a record is retransmitted. Although no function is defined on how to increase `Send Epoch`, it should be exponentially increased until reaching an upper bound where it then goes back to a lower epoch in order to prevent a records `Send Epoch`'s from becoming too large.
 
 > ***NOTE:** We do not retransmission `ACK`s as we do not know when they have arrived, therefore we simply resend them every time we receive a `MESSAGE`*
 
