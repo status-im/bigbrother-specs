@@ -78,7 +78,7 @@ State is kept for any message of the types `OFFER`, `REQUEST` and `MESSAGE` we d
 
 ### Flow
 
-A maximum of one payload is sent to peers per epoch, this payload contains all `ACK`, `OFFER`, `REQUEST` and `MESSAGE` messages for the specific peer. Payloads are created in reaction to messages recieved by peers or new messages being sent by a node. 
+A maximum of one payload is sent to peers per epoch, this payload contains all `ACK`, `OFFER`, `REQUEST` and `MESSAGE` messages for the specific peer. Payloads are created every epoch containing reactions to previously received messages by peers or new messages being sent out by nodes. 
 
 Nodes have two modes with which they can send messages, `BATCH` and `INTERACTIVE` mode. The following rules dictate how nodes construct payloads every epoch for any given peer for both modes.
 
