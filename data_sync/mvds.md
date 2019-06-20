@@ -49,7 +49,7 @@ message Payload {
 }
 
 message Ack {
-  repeated bytes id = 1;
+  repeated bytes ids = 1;
 }
 
 message Message {
@@ -59,11 +59,11 @@ message Message {
 }
 
 message Offer {
-  repeated bytes id = 1;
+  repeated bytes ids = 1;
 }
 
 message Request {
-  repeated bytes id = 1;
+  repeated bytes ids = 1;
 }
 ```
 
