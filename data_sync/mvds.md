@@ -122,7 +122,7 @@ The record of the type `Type` is retransmitted every time `Send Epoch` is smalle
 
 `Send Epoch` and `Send Count` are increased every time a record is retransmitted. Although no function is defined on how to increase `Send Epoch`, it should be exponentially increased until reaching an upper bound where it then goes back to a lower epoch in order to prevent a records `Send Epoch`'s from becoming too large.
 
-> ***NOTE:** We do not retransmission `ACK`s as we do not know when they have arrived, therefore we simply resend them every time we receive a `MESSAGE`*
+> ***NOTE:** We do not retransmission `ACK`s as we do not know when they have arrived, therefore we simply resend them every time we receive a `MESSAGE`.*
 
 ## Footnotes
 
