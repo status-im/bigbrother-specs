@@ -68,7 +68,7 @@ Each payload contains the following fields:
 
 ### State
 
-We refer to `state` as the data each node holds for records of the types `OFFER`, `REQUEST` and `MESSAGE` per peer. We do not keep states for `ACK` records as we do not retransmit those periodically. The following information is stored for records:
+We refer to `state` as a collection of data each node holds on records of the types `OFFER`, `REQUEST` and `MESSAGE` per peer. We do not keep states for `ACK` records as we do not retransmit those periodically. The following information is stored for records:
 
  - **Type** - Either `OFFER`, `REQUEST` or `MESSAGE`
  - **Send Count** - The amount of times a record has been sent to a peer.
