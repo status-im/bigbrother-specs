@@ -16,6 +16,7 @@
     2. [Flow](#flow)
     3. [Retransmission](#retransmission)
 5. [Footnotes](#footnotes)
+6. [Acknowledgements](#acknowledgements)
 
 ## Abstract
 
@@ -124,3 +125,7 @@ The record of the type `Type` is retransmitted every time `Send Epoch` is smalle
 
 1. https://code.briarproject.org/briar/briar-spec/blob/master/protocols/BSP.md
 2. https://github.com/status-im/mvds
+
+## Acknowledgements
+ - Preston van Loon
+ - Greg Markou
