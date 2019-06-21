@@ -59,9 +59,9 @@ message Message {
 
 Each payload contains the following fields:
 
-- **Acks:** This field contains a list (can be empty) of `MessageID`s informing the recepient that sender holds a specific message.
-- **Offers:** This field contains a list (can be empty) of `MessageID`s that the sender would like to give to the recepient.
-- **Requests:** This field contains a list (can be empty) of `MessageID`s that the sender would like to receive from the recepient.
+- **Acks:** This field contains a list (can be empty) of `message identifiers` informing the recepient that sender holds a specific message.
+- **Offers:** This field contains a list (can be empty) of `message identifiers` that the sender would like to give to the recepient.
+- **Requests:** This field contains a list (can be empty) of `message identifiers` that the sender would like to receive from the recepient.
 - **Messages:** This fied contains a list of messages (can be empty).
 
 ## Synchronization
