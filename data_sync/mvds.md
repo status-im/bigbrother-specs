@@ -16,6 +16,7 @@
     2. [Flow](#flow)
     3. [Retransmission](#retransmission)
 5. [Footnotes](#footnotes)
+6. [Acknowledgements](#acknowledgements)
 
 ## Abstract
 
@@ -42,14 +43,10 @@ Payloads are implemented using [protocol buffers](https://developers.google.com/
 
 ```protobuf
 message Payload {
-  Ack ack = 1;
-  Offer offer = 2;
-  Request request = 3;
+  repeated bytes acks = 1;
+  repeated bytes offers = 2;
+  repeated bytes requests = 3;
   repeated Message messages = 4;
-}
-
-message Ack {
-  repeated bytes ids = 1; // A list of Message IDs a node is acknowledging
 }
 
 message Message {
@@ -58,20 +55,20 @@ message Message {
   bytes body = 3;
 }
 
-message Offer {
-  repeated bytes ids = 1; // A list of Message IDs a node is offering
-}
-
-message Request {
-  repeated bytes ids = 1; // A list of Message IDs a node is requesting
-}
 ```
+
+Each payload contains the following fields:
+
+- **Acks:** This field contains a list (can be empty) of `MessageID`s informing the recepient that sender holds a specific message.
+- **Offers:** This field contains a list (can be empty) of `MessageID`s that the sender would like to give to the recepient.
+- **Requests:** This field contains a list (can be empty) of `MessageID`s that the sender would like to receive from the recepient.
+- **Messages:** This fied contains a list of messages (can be empty).
 
 ## Synchronization
 
 ### State
 
-State is kept for any record of the types `OFFER`, `REQUEST` and `MESSAGE` we do not keep states for `ACK` records as we do not retransmit those periodically. State is stored per peer. The following information is stored for records:
+We refer to `state` as the data each node holds for records of the types `OFFER`, `REQUEST` and `MESSAGE` per peer. We do not keep states for `ACK` records as we do not retransmit those periodically. The following information is stored for records:
 
  - **Type** - Either `OFFER`, `REQUEST` or `MESSAGE`
  - **Send Count** - The amount of times a record has been sent to a peer.
@@ -128,3 +125,7 @@ The record of the type `Type` is retransmitted every time `Send Epoch` is smalle
 
 1. https://code.briarproject.org/briar/briar-spec/blob/master/protocols/BSP.md
 2. https://github.com/status-im/mvds
+
+## Acknowledgements
+ - Preston van Loon
+ - Greg Markou
