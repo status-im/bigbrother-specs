@@ -35,7 +35,7 @@ We present a functional specification for future implementation<sup>2</sup> as w
 
 ### Secure Transport
 
-This specification does not define anything related to the transport of packets. It is assumed that this is abstracted in such a way that any secure transport protocol could be easily implemented. Likewise, properties such as confidentiality, integrity, authenticity and forward secrecy are assumped to be provided by a layer below.
+This specification does not define anything related to the transport of packets. It is assumed that this is abstracted in such a way that any secure transport protocol could be easily implemented. Likewise, properties such as confidentiality, integrity, authenticity and forward secrecy are assumed to be provided by a layer below.
 
 ### Payloads
 
@@ -59,10 +59,10 @@ message Message {
 
 Each payload contains the following fields:
 
-- **Acks:** This field contains a list (can be empty) of `message identifiers` informing the recepient that sender holds a specific message.
-- **Offers:** This field contains a list (can be empty) of `message identifiers` that the sender would like to give to the recepient.
-- **Requests:** This field contains a list (can be empty) of `message identifiers` that the sender would like to receive from the recepient.
-- **Messages:** This fied contains a list of messages (can be empty).
+- **Acks:** This field contains a list (can be empty) of `message identifiers` informing the recipient that sender holds a specific message.
+- **Offers:** This field contains a list (can be empty) of `message identifiers` that the sender would like to give to the recipient.
+- **Requests:** This field contains a list (can be empty) of `message identifiers` that the sender would like to receive from the recipient.
+- **Messages:** This field contains a list of messages (can be empty).
 
 ## Synchronization
 
@@ -83,8 +83,8 @@ Nodes have two modes with which they can send records, `BATCH` and `INTERACTIVE`
 #### Interactive Mode
 
  - A node initially offers a `MESSAGE` when attempting to send it to a peer, this means an `OFFER` is added to the next payload and the state for the given peer.
- - When a node recieves an `OFFER`, a `REQUEST` is added to the next payload and the state for the given peer. 
- - When a node recieves a `REQUEST` for a previously sent `OFFER`, the `OFFER` is removed from the state and the corresponding `MESSAGE` is added to the next payload and the state for the given peer.
+ - When a node receives an `OFFER`, a `REQUEST` is added to the next payload and the state for the given peer. 
+ - When a node receives a `REQUEST` for a previously sent `OFFER`, the `OFFER` is removed from the state and the corresponding `MESSAGE` is added to the next payload and the state for the given peer.
  - When a node receives a `MESSAGE`, the `REQUEST` is removed from the state and an `ACK` is added to the next payload for the given peer.
  - When a node receives an `ACK`, the `MESSAGE` is removed from the state for the given peer.
  - All records that require retransmission are added to the payload, given `Send Epoch` has been reached.
