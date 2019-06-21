@@ -82,7 +82,7 @@ Nodes have two modes with which they can send records, `BATCH` and `INTERACTIVE`
 
 #### Interactive Mode
 
- - A node initially offers a `MESSAGE`, this means an `OFFER` is added to the next payload and the state for the given peer.
+ - A node initially offers a `MESSAGE` when wanting to send it to a peer, this means an `OFFER` is added to the next payload and the state for the given peer.
  - When a node recieves an `OFFER`, a `REQUEST` is added to the next payload and the state for the given peer. 
  - When a node recieves a `REQUEST` for a previously sent `OFFER`, the `OFFER` is removed from the state and the corresponding `MESSAGE` is added to the next payload and the state for the given peer.
  - When a node receives a `MESSAGE`, the `REQUEST` is removed from the state and an `ACK` is added to the next payload for the given peer.
