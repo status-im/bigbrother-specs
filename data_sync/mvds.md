@@ -26,10 +26,11 @@ We present a functional specification for future implementation<sup>2</sup> as w
 
 ## Definitions
 
-| Term | Description |
-|------|-------------|
-| **Peer** | The other nodes that a node is connected to. |
+| Term       | Description                                                                         |
+|------------|-------------------------------------------------------------------------------------|
+| **Peer**   | The other nodes that a node is connected to.                                        |
 | **Record** | Defines a payload element of either the type `OFFER`, `REQUEST`, `MESSAGE` or `ACK` |
+| **Node**   | Some process that is able to store data, do processing and communicate for MVDS.    |
 
 ## Wire Protocol
 
