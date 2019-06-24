@@ -20,7 +20,7 @@
 
 ## Abstract
 
-In this specification we describe a minimum viable protocol for data synchronization inspired by the Bramble Synchronization Protocol<sup>1</sup>. This protocol is designed to ensure reliable messaging between peers communicating across an unreliable peer-to-peer (P2P) network where they may be unreachable or unresponsive.
+In this specification, we describe a minimum viable protocol for data synchronization inspired by the Bramble Synchronization Protocol<sup>1</sup>. This protocol is designed to ensure reliable messaging between peers across an unreliable peer-to-peer (P2P) network where they may be unreachable or unresponsive.
 
 We present a functional specification for future implementation<sup>2</sup> as well as reference simulation data which demonstrates its performance.
 
@@ -76,15 +76,15 @@ We refer to `state` as a collection of data each node holds on records of the ty
 
 ### Flow
 
-A maximum of one payload is sent to peers per epoch, this payload contains all `ACK`, `OFFER`, `REQUEST` and `MESSAGE` records for the specific peer. Payloads are created every epoch containing reactions to previously received records by peers or new records being sent out by nodes. 
+A maximum of one payload is sent to peers per epoch, this payload contains all `ACK`, `OFFER`, `REQUEST` and `MESSAGE` records for the specific peer. Payloads are created every epoch, containing reactions to previously received records by peers or new records being sent out by nodes. 
 
-Nodes have two modes with which they can send records, `BATCH` and `INTERACTIVE` mode. The following rules dictate how nodes construct payloads every epoch for any given peer for both modes.
+Nodes have two modes with which they can send records: `BATCH` and `INTERACTIVE` mode. The following rules dictate how nodes construct payloads every epoch for any given peer for both modes.
 
 #### Interactive Mode
 
- - A node initially offers a `MESSAGE` when attempting to send it to a peer, this means an `OFFER` is added to the next payload and the state for the given peer.
- - When a node receives an `OFFER`, a `REQUEST` is added to the next payload and the state for the given peer. 
- - When a node receives a `REQUEST` for a previously sent `OFFER`, the `OFFER` is removed from the state and the corresponding `MESSAGE` is added to the next payload and the state for the given peer.
+ - A node initially offers a `MESSAGE` when attempting to send it to a peer. This means an `OFFER` is added to the next payload and state for the given peer.
+ - When a node receives an `OFFER`, a `REQUEST` is added to the next payload and state for the given peer. 
+ - When a node receives a `REQUEST` for a previously sent `OFFER`, the `OFFER` is removed from the state and the corresponding `MESSAGE` is added to the next payload and state for the given peer.
  - When a node receives a `MESSAGE`, the `REQUEST` is removed from the state and an `ACK` is added to the next payload for the given peer.
  - When a node receives an `ACK`, the `MESSAGE` is removed from the state for the given peer.
  - All records that require retransmission are added to the payload, given `Send Epoch` has been reached.
@@ -117,7 +117,7 @@ Nodes have two modes with which they can send records, `BATCH` and `INTERACTIVE`
 
 The record of the type `Type` is retransmitted every time `Send Epoch` is smaller than or equal to the current epoch.
 
-`Send Epoch` and `Send Count` are increased every time a record is retransmitted. Although no function is defined on how to increase `Send Epoch`, it should be exponentially increased until reaching an upper bound where it then goes back to a lower epoch in order to prevent a records `Send Epoch`'s from becoming too large.
+`Send Epoch` and `Send Count` are increased every time a record is retransmitted. Although no function is defined on how to increase `Send Epoch`, it should be exponentially increased until reaching an upper bound where it then goes back to a lower epoch in order to prevent a record's `Send Epoch`'s from becoming too large.
 
 > ***NOTE:** We do not retransmission `ACK`s as we do not know when they have arrived, therefore we simply resend them every time we receive a `MESSAGE`.*
 
