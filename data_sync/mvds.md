@@ -108,7 +108,7 @@ Nodes have two modes with which they can send records: `BATCH` and `INTERACTIVE`
 <p align="center">
     <img src="./assets/mvds/batch_seqdiagram.png" />
     <br />
-    Figure 1: Delivery without retransmissions in batch mode.
+    Figure 2: Delivery without retransmissions in batch mode.
 </p>
 
 
