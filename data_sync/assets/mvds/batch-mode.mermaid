@@ -1,0 +1,40 @@
+# Sequence diagram source
+
+Live version: https://notes.status.im/ZhoVhCCoSrakZs6D5ohRdg?both
+
+```mermaid
+sequenceDiagram
+
+Note right of Alice: X1?: Assumes sharing relationship and csecure channel between Alice and Bob has been established.
+Alice->>Alice: X2?: Save message A1 locally
+Alice->>Alice: 1: Add MESSAGE A1 to payload state for Bob
+
+loop Alice: Every epoch, for every peer
+    alt New messages to send to Bob
+        Alice--x+Bob: X3?: Send payload with [MESSAGE A1]
+        Alice->>Alice: 4. Update state for Bob A1 MESSAGE
+    else No new messages
+        Alice->>Alice: Noop
+    end
+end
+
+loop Bob listens or polls
+    alt Bob receives payload from Alice
+        Bob->Bob: X4?: Bob updates state
+        Bob->Bob: 2: ACK A1 added to next payload
+    else Bob doesn't get message
+            Bob->Bob: Noop
+    end
+end
+
+loop Bob: Every epoch, for every peer
+    alt New messages to send to Alice
+        Bob--x-Alice: X3?: Send payload with [ACK A1]
+        Bob->>Alice: 4. Update state for Alice A1 ACK
+    else No new messages
+        Alice->>Alice: Noop
+    end
+end
+
+Alice->>Alice: 3: [...Receive ACK logic...]
+```

@@ -1,0 +1,44 @@
+sequenceDiagram
+
+Note right of Alice: X1?: Assumes sharing relationship and csecure channel between Alice and Bob has been established.
+Alice->>Alice: X2?: Save message A1 locally
+Alice->>Alice: 1: Add OFFER A1 to payload state for Bob
+
+loop Alice: Every epoch, for every peer
+    alt New records to send to Bob
+        Alice--x+Bob: X3?: Send payload with [OFFER A1]
+        Alice->>Alice: 4. Update state for Bob A1 OFFER
+    else No new records
+        Alice->>Alice: Noop
+    end
+end
+
+loop Bob listens or polls
+    alt Bob receives payload from Alice
+        Bob->Bob: X4?: Bob updates state
+        Bob->Bob: 2: REQUEST A1 added to next payload
+    else Bob doesn't get message
+            Bob->Bob: Noop
+    end
+end
+
+loop Alice listens or polls
+    alt Alice receives payload from Bob
+        Alice->Alice: X4?: Alice updates state
+        Alice->Alice: 2: MESSAGE A1 added to next payload
+    else Alice doesn't get message
+            Alice->Alice: Noop
+    end
+end
+
+
+loop Bob: Every epoch, for every peer
+    alt New records to send to Alice
+        Bob--x-Alice: X3?: Send payload with [ACK A1]
+        Bob->>Alice: 4. Update state for Alice A1 ACK
+    else No new records
+        Alice->>Alice: Noop
+    end
+end
+
+Alice->>Alice: 3: [...Receive ACK logic...]

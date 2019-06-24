@@ -1,6 +1,8 @@
 # Data Sync
 
-The data sync protocol defines the protocol with which clients interact. It interacts directly with the secure transport layer. 
+The data sync protocol defines the protocol with which clients interact. It interacts directly with the secure transport layer.
+
+Currently there is a spec for [minimally viable data synchronization](./mvds.md), which features certain guarantees required.
 
 @todo: Do nodes chose what they want to sync?
 
