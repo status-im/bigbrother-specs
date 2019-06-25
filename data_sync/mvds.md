@@ -40,9 +40,11 @@ This specification does not define anything related to the transport of packets.
 
 ### Payloads
 
-Payloads are implemented using [protocol buffers](https://developers.google.com/protocol-buffers/).
+Payloads are implemented using [protocol buffers v3](https://developers.google.com/protocol-buffers/).
 
 ```protobuf
+syntax = "proto3";
+
 message Payload {
   repeated bytes acks = 1;
   repeated bytes offers = 2;
@@ -64,6 +66,14 @@ Each payload contains the following fields:
 - **Offers:** This field contains a list (can be empty) of `message identifiers` that the sender would like to give to the recipient.
 - **Requests:** This field contains a list (can be empty) of `message identifiers` that the sender would like to receive from the recipient.
 - **Messages:** This field contains a list of messages (can be empty).
+
+**Message Identifiers:** Each `message` has a message identifier caluclated by hashing the `group_id`, `timestamp` and `body` fields as follows:
+
+```
+HASH("MESSAGE_ID", group_id, timestamp, body);
+```
+
+The current `HASH` function used is `sha256`.
 
 ## Synchronization
 
