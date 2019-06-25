@@ -141,3 +141,5 @@ The record of the type `Type` is retransmitted every time `Send Epoch` is smalle
  - Preston van Loon
  - Greg Markou
  - Rene Nayman
+ - Jacek Sieka
+
