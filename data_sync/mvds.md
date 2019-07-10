@@ -128,7 +128,7 @@ Nodes MAY have two modes with which they can send records: `BATCH` and `INTERACT
 
 ### Retransmission
 
-The record of the type `Type` MUST be retransmitted every time `Send Epoch` is smaller than or equal to the current epoch.
+The record of the type `Type` SHOULD be retransmitted every time `Send Epoch` is smaller than or equal to the current epoch.
 
 `Send Epoch` and `Send Count` MUST be increased every time a record is retransmitted. Although no function is defined on how to increase `Send Epoch`, it SHOULD be exponentially increased until reaching an upper bound where it then goes back to a lower epoch in order to prevent a record's `Send Epoch`'s from becoming too large.
 
