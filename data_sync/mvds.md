@@ -4,6 +4,8 @@
 
 *Written by Oskar Thorén oskar@status.im & Dean Eigenmann dean@status.im*
 
+**This document follows [RFC-2119](https://tools.ietf.org/html/rfc2119).**
+
 ## Table of Contents
 
 1. [Abstract](#abstract)
@@ -79,7 +81,7 @@ The current `HASH` function used is `sha256`.
 
 ### State
 
-We refer to `state` as a collection of data each node holds on records of the types `OFFER`, `REQUEST` and `MESSAGE` per peer. We do not keep states for `ACK` records as we do not retransmit those periodically. The following information is stored for records:
+We refer to `state` as a collection of data each node SHOULD hold for records of the types `OFFER`, `REQUEST` and `MESSAGE` per peer. We MUST NOT keep states for `ACK` records as we do not retransmit those periodically. The following information is stored for records:
 
  - **Type** - Either `OFFER`, `REQUEST` or `MESSAGE`
  - **Send Count** - The amount of times a record has been sent to a peer.
@@ -87,9 +89,9 @@ We refer to `state` as a collection of data each node holds on records of the ty
 
 ### Flow
 
-A maximum of one payload is sent to peers per epoch, this payload contains all `ACK`, `OFFER`, `REQUEST` and `MESSAGE` records for the specific peer. Payloads are created every epoch, containing reactions to previously received records by peers or new records being sent out by nodes. 
+A maximum of one payload SHOULD be sent to peers per epoch, this payload contains all `ACK`, `OFFER`, `REQUEST` and `MESSAGE` records for the specific peer. Payloads are created every epoch, containing reactions to previously received records by peers or new records being sent out by nodes. 
 
-Nodes have two modes with which they can send records: `BATCH` and `INTERACTIVE` mode. The following rules dictate how nodes construct payloads every epoch for any given peer for both modes.
+Nodes MAY have two modes with which they can send records: `BATCH` and `INTERACTIVE` mode. The following rules dictate how nodes construct payloads every epoch for any given peer for both modes.
 
 #### Interactive Mode
 
@@ -126,9 +128,9 @@ Nodes have two modes with which they can send records: `BATCH` and `INTERACTIVE`
 
 ### Retransmission
 
-The record of the type `Type` is retransmitted every time `Send Epoch` is smaller than or equal to the current epoch.
+The record of the type `Type` SHOULD be retransmitted every time `Send Epoch` is smaller than or equal to the current epoch.
 
-`Send Epoch` and `Send Count` are increased every time a record is retransmitted. Although no function is defined on how to increase `Send Epoch`, it should be exponentially increased until reaching an upper bound where it then goes back to a lower epoch in order to prevent a record's `Send Epoch`'s from becoming too large.
+`Send Epoch` and `Send Count` MUST be increased every time a record is retransmitted. Although no function is defined on how to increase `Send Epoch`, it SHOULD be exponentially increased until reaching an upper bound where it then goes back to a lower epoch in order to prevent a record's `Send Epoch`'s from becoming too large.
 
 > ***NOTE:** We do not retransmission `ACK`s as we do not know when they have arrived, therefore we simply resend them every time we receive a `MESSAGE`.*
 
@@ -142,4 +144,3 @@ The record of the type `Type` is retransmitted every time `Send Epoch` is smalle
  - Greg Markou
  - Rene Nayman
  - Jacek Sieka
-
