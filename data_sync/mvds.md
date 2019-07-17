@@ -1,6 +1,6 @@
 # Minimum Viable Data Synchronization
 
-**DRAFT VERSION 0.5**
+**DRAFT VERSION 0.5.1**
 
 *Written by Oskar Thorén oskar@status.im & Dean Eigenmann dean@status.im*
 
@@ -103,7 +103,7 @@ Nodes MAY have two modes with which they can send records: `BATCH` and `INTERACT
  - All records that require retransmission are added to the payload, given `Send Epoch` has been reached.
 
 <p align="center">
-    <img src="./assets/mvds/interactive_seqdiagram.png" />
+    <img src="./assets/mvds/interactive.png" />
     <br />
     Figure 1: Delivery without retransmissions in interactive mode.
 </p>
@@ -118,7 +118,7 @@ Nodes MAY have two modes with which they can send records: `BATCH` and `INTERACT
 <!-- diagram -->
 
 <p align="center">
-    <img src="./assets/mvds/batch_seqdiagram.png" />
+    <img src="./assets/mvds/batch.png" />
     <br />
     Figure 2: Delivery without retransmissions in batch mode.
 </p>

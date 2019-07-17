@@ -1,0 +1,8 @@
+Use https://mscgen.js.org/ and export image there. Make sure to keep actual
+source code in source control and not just add images.
+
+There's also a CLI tool.
+
+Why mscgen over mermaid?
+It's simpler and less buggy (UI rendering, etc). More specific tool for
+sequence diagrams in particulr. See above site examples.
