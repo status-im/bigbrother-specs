@@ -71,6 +71,8 @@ The below table shows the intended layers of the network from the *highest* to t
 | Transport Privacy | Metadata protection             | Mixnet?                       |
 | P2P Overlay       | Overlay routing, NAT traversal  | libp2p?                       |
  
+TODO: Fold in [Interfaces](interfaces.md) once ready.
+
 ## Phases
 
 Inspired by the ETH 2.0 implementation process, we have decided to roll out BigBrother in multiple phases. The phases can mostly be linked to various layers in the [stack](#stack). Some of these phases are sometimes more loosely coupled than ETH 2.0 components meaning they can be done in parallel as only the communication API is relevant.
